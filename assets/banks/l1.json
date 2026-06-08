@@ -1,0 +1,215 @@
+{
+  "level": "l1",
+  "name": "Digital Functional Skills — Level 1",
+  "mcqs": [
+    { "id": "l1-1.3-sponsored-results", "area": "1-search",
+      "context": "Some internet search results are sponsored.",
+      "stem": "Where would you see the sponsored results in a list of search results when you use an internet search engine?",
+      "options": ["At the top", "In the middle", "At the bottom", "In the search criteria box"], "answer": "At the top" },
+
+    { "id": "l1-1.3-boolean", "area": "1-search", "stem": "Which search will give the most precise results for an exact phrase?",
+      "options": ["climate change", "\"climate change\"", "+climate +change", "climate OR change"], "answer": "\"climate change\"" },
+
+    { "id": "l1-1.3-exclude", "area": "1-search", "stem": "How do you tell most search engines to EXCLUDE a word from results?",
+      "options": ["Put a minus sign in front: jaguar -car", "Put the word in capitals", "Put it at the end", "Put a # in front"], "answer": "Put a minus sign in front: jaguar -car" },
+
+    { "id": "l1-1.2-reliable", "area": "1-search", "stem": "Which website is most likely to give reliable information about a medical condition?",
+      "options": ["A user-edited message board", "The NHS website", "A blog with no author", "An advert"], "answer": "The NHS website" },
+
+    { "id": "l1-1.2-evaluate", "area": "1-search", "stem": "Which is the BEST sign that information online is reliable?",
+      "options": ["Lots of flashing adverts", "Author and date are clearly shown", "The site uses bright colours", "Lots of pop-ups"], "answer": "Author and date are clearly shown" },
+
+    { "id": "l1-1.2-bias", "area": "1-search", "stem": "Why might a company's own website be a less balanced source of information about its products?",
+      "options": ["It only shows the company in a positive light", "It uses too much text", "It is illegal", "It has too few pages"], "answer": "It only shows the company in a positive light" },
+
+    { "id": "l1-1.5-folders", "area": "1-files", "stem": "Which file name is most appropriate for a project meeting from January 2026?",
+      "options": ["doc1.docx", "thing.docx", "2026-01-Project-Meeting.docx", "ASDF.docx"], "answer": "2026-01-Project-Meeting.docx" },
+
+    { "id": "l1-1.4-search-files", "area": "1-files", "stem": "Which of these can you use to find a file when you only remember part of its name?",
+      "options": ["A spreadsheet formula", "The file explorer search box", "Bluetooth", "The recycle bin"], "answer": "The file explorer search box" },
+
+    { "id": "l1-1.6-cloud-sync", "area": "1-files", "stem": "How can you start a document on a laptop and continue it on a phone?",
+      "options": ["Save it to USB only", "Print it out", "Save it to cloud storage", "Email it to yourself once a week"], "answer": "Save it to cloud storage" },
+
+    { "id": "l1-1.6-permissions", "area": "1-files", "stem": "You share a cloud file as 'View only'. What can the recipient do?",
+      "options": ["Read it but not change it", "Read AND delete it", "Only print it", "Nothing"], "answer": "Read it but not change it" },
+
+    { "id": "l1-1.6-version", "area": "1-files", "stem": "Why is cloud version history useful?",
+      "options": ["It lets you restore an earlier version of a file", "It speeds up Wi-Fi", "It adds page numbers", "It encrypts your password"], "answer": "It lets you restore an earlier version of a file" },
+
+    { "id": "l1-1.7-kb-mb", "area": "1-storage", "stem": "Which of these is the largest size?",
+      "options": ["1 megabyte", "1 kilobyte", "1 gigabyte", "1 byte"], "answer": "1 gigabyte" },
+
+    { "id": "l1-1.7-storage-size", "area": "1-storage",
+      "context": "You have a smartphone with 5000 kilobytes of free space.",
+      "stem": "Which one of these file sizes do you have space to download?",
+      "options": ["5 terabytes", "50 megabytes", "500 gigabytes", "50000 bytes"], "answer": "50000 bytes" },
+
+    { "id": "l1-1.7-tb-largest", "area": "1-storage", "stem": "Which is the LARGEST unit of digital storage in this list?",
+      "options": ["GB", "MB", "TB", "KB"], "answer": "TB" },
+
+    { "id": "l1-1.8-compression", "area": "1-storage", "stem": "What is a consequence of file compression?",
+      "options": ["Reduces data transfer time", "Increases data transfer time", "Automatically backs up files", "Prevents files from being shared"], "answer": "Reduces data transfer time" },
+
+    { "id": "l1-1.8-zip", "area": "1-storage", "stem": "Which file type usually contains other files compressed together?",
+      "options": [".zip", ".png", ".mp3", ".csv"], "answer": ".zip" },
+
+    { "id": "l1-1.9-help-icon", "area": "1-problems", "stem": "Which icon on an application is most likely to give you help?",
+      "options": ["♥", "?", "▶", "■"], "answer": "?" },
+
+    { "id": "l1-1.9-crash-report", "area": "1-problems",
+      "context": "An application has crashed twice this morning.",
+      "stem": "What is the most useful next step?",
+      "options": ["Note the error message and check the app's support pages", "Reformat the device", "Send a screenshot to a stranger", "Delete the operating system"],
+      "answer": "Note the error message and check the app's support pages" },
+
+    { "id": "l1-1.9-cant-print", "area": "1-problems", "stem": "A printer says 'offline'. What is a sensible first check?",
+      "options": ["Check the cable / Wi-Fi between the printer and computer", "Send an email to the manufacturer", "Restart your phone", "Replace the printer"], "answer": "Check the cable / Wi-Fi between the printer and computer" },
+
+    { "id": "l1-1.9-restart", "area": "1-problems", "stem": "Why is restarting a device often a good first step when something is wrong?",
+      "options": ["It clears temporary problems in memory", "It deletes all your files", "It updates the operating system fully", "It charges the battery faster"], "answer": "It clears temporary problems in memory" },
+
+    { "id": "l1-2.4-formula", "area": "2-spreadsheet", "stem": "Which spreadsheet formula adds the values in cells C4 to C11?",
+      "options": ["=ADD(C4,C11)", "=SUM(C4:C11)", "=AVG(C4:C11)", "=COUNT(C4,C11)"], "answer": "=SUM(C4:C11)" },
+
+    { "id": "l1-2.4-average", "area": "2-spreadsheet", "stem": "Which formula calculates the mean of the values in cells B2 to B10?",
+      "options": ["=AVERAGE(B2:B10)", "=MEAN(B2:B10)", "=SUM(B2-B10)", "=COUNTIF(B2:B10)"], "answer": "=AVERAGE(B2:B10)" },
+
+    { "id": "l1-2.4-max", "area": "2-spreadsheet", "stem": "Which formula returns the highest number in the range D2:D20?",
+      "options": ["=HIGH(D2:D20)", "=MAX(D2:D20)", "=BIG(D2:D20)", "=TOP(D2:D20)"], "answer": "=MAX(D2:D20)" },
+
+    { "id": "l1-2.4-count", "area": "2-spreadsheet", "stem": "Which formula counts how many numeric cells are in A2:A100?",
+      "options": ["=COUNT(A2:A100)", "=NUMBER(A2:A100)", "=SUM(A2:A100)", "=AVG(A2:A100)"], "answer": "=COUNT(A2:A100)" },
+
+    { "id": "l1-2.4-cell-ref", "area": "2-spreadsheet", "stem": "What is the cell reference for the cell in column C, row 7?",
+      "options": ["C7", "7C", "RC", "row7"], "answer": "C7" },
+
+    { "id": "l1-2.4-equals", "area": "2-spreadsheet", "stem": "Every spreadsheet formula must start with which character?",
+      "options": ["=", "@", "#", "$"], "answer": "=" },
+
+    { "id": "l1-2.7-chart-type", "area": "2-creating", "stem": "Which chart is most suitable for showing parts of a whole, like sales by sandwich type?",
+      "options": ["Line chart", "Pie chart", "Scatter plot", "Histogram"], "answer": "Pie chart" },
+
+    { "id": "l1-2.7-line-chart", "area": "2-creating", "stem": "Which chart is best for showing how a value changes over time, e.g. monthly sales?",
+      "options": ["Pie chart", "Line chart", "Stacked bar with no time axis", "Bubble chart"], "answer": "Line chart" },
+
+    { "id": "l1-2.7-bar-chart", "area": "2-creating", "stem": "Which chart is best for COMPARING quantities across categories?",
+      "options": ["Pie chart", "Line chart", "Bar / column chart", "Scatter plot"], "answer": "Bar / column chart" },
+
+    { "id": "l1-2.6-currency", "area": "2-spreadsheet", "stem": "What format should you apply to a column of prices in a spreadsheet?",
+      "options": ["Date", "Currency", "Percentage", "Time"], "answer": "Currency" },
+
+    { "id": "l1-2.6-percent", "area": "2-spreadsheet", "stem": "Which format should you use for a column showing growth like 12% and 7%?",
+      "options": ["Date", "Currency", "Percentage", "Scientific"], "answer": "Percentage" },
+
+    { "id": "l1-2.5-sort", "area": "2-spreadsheet", "stem": "What does sorting a column A→Z do?",
+      "options": ["Arranges the data alphabetically from smallest to largest", "Deletes duplicate rows", "Hides empty rows", "Applies bold to the header"], "answer": "Arranges the data alphabetically from smallest to largest" },
+
+    { "id": "l1-2.5-merge", "area": "2-spreadsheet", "stem": "Why might you merge cells A1:H1 in a spreadsheet?",
+      "options": ["To create a single centred title across the table", "To delete the data", "To freeze the header row", "To hide the column"], "answer": "To create a single centred title across the table" },
+
+    { "id": "l1-2.5-freeze", "area": "2-spreadsheet", "stem": "What does freezing the top row of a spreadsheet do?",
+      "options": ["Keeps the header visible while you scroll", "Deletes the row", "Locks editing forever", "Prints only that row"], "answer": "Keeps the header visible while you scroll" },
+
+    { "id": "l1-2.2-doc-page-break", "area": "2-creating", "stem": "Which feature forces text to start at the top of the next page in a Word document?",
+      "options": ["Page break", "Line break", "Tab", "Bullet point"], "answer": "Page break" },
+
+    { "id": "l1-2.2-doc-landscape", "area": "2-creating", "stem": "Which page orientation is wider than it is tall?",
+      "options": ["Portrait", "Landscape", "Mixed", "Custom"], "answer": "Landscape" },
+
+    { "id": "l1-2.2-doc-toc", "area": "2-creating", "stem": "What is a Table of Contents in a document?",
+      "options": ["A list of headings with page numbers", "A list of cells in a spreadsheet", "A list of images only", "A list of fonts"], "answer": "A list of headings with page numbers" },
+
+    { "id": "l1-2.2-doc-images", "area": "2-creating", "stem": "Why should you give an image in a document descriptive alt text?",
+      "options": ["So screen readers can describe the image to visually impaired readers", "So the image is bigger", "So the image is hidden", "So the file size grows"], "answer": "So screen readers can describe the image to visually impaired readers" },
+
+    { "id": "l1-3.1-email-tone", "area": "3-comms", "stem": "Which greeting is most appropriate in a work email to a manager you have not met?",
+      "options": ["yo", "Dear Mr/Ms Smith", "hi babe", "no greeting"], "answer": "Dear Mr/Ms Smith" },
+
+    { "id": "l1-3.1-email-close", "area": "3-comms", "stem": "Which is the most appropriate closing for a formal work email?",
+      "options": ["lol", "Kind regards", "smell ya later", "x"], "answer": "Kind regards" },
+
+    { "id": "l1-3.2-signature", "area": "3-comms", "stem": "What is the purpose of an email signature?",
+      "options": ["Automatically adds your name and contact details to every email", "Encrypts the email", "Marks the email as urgent", "Forwards the email"], "answer": "Automatically adds your name and contact details to every email" },
+
+    { "id": "l1-3.2-cc-vs-bcc", "area": "3-comms", "stem": "Which header keeps recipients hidden from each other?",
+      "options": ["Cc", "Bcc", "To", "Subject"], "answer": "Bcc" },
+
+    { "id": "l1-3.3-digital-footprint", "area": "3-comms", "stem": "What can you do to limit your digital footprint?",
+      "options": ["Accept third party cookies", "Use private browsing", "Send email attachments", "Click on the links in emails"], "answer": "Use private browsing" },
+
+    { "id": "l1-3.3-shared-doc", "area": "3-comms", "stem": "You want two people to edit the same document at the same time. What is the easiest way?",
+      "options": ["Share it in cloud storage with Edit permission", "Email a copy to each person and merge later", "Print it twice", "Use a USB stick"], "answer": "Share it in cloud storage with Edit permission" },
+
+    { "id": "l1-3.3-video-call-pro", "area": "3-comms", "stem": "Which is professional behaviour in a work video call?",
+      "options": ["Mute your microphone when not speaking", "Eat a sandwich on camera", "Leave the camera on during a private call", "Talk over everyone else"], "answer": "Mute your microphone when not speaking" },
+
+    { "id": "l1-3.4-message-style", "area": "3-comms", "stem": "Which message is most appropriate for a customer service team?",
+      "options": ["Hi, my order #1234 hasn't arrived. Could you check the status please? Thanks.", "WHERE IS MY THING??!!", "Lol idk what's going on", "no message just emojis"], "answer": "Hi, my order #1234 hasn't arrived. Could you check the status please? Thanks." },
+
+    { "id": "l1-4.3-https", "area": "4-transacting", "stem": "What feature of the website shows that it is secure?",
+      "options": ["The site name", "Padlock symbol and https:", "A large logo", "The hosting country"], "answer": "Padlock symbol and https:" },
+
+    { "id": "l1-4.3-fake-site", "area": "4-transacting", "stem": "Which of these suggests a shopping website might NOT be legitimate?",
+      "options": ["Padlock in the URL bar", "Good reviews on independent sites", "Lots of spelling mistakes and a strange domain", "Clear returns policy"], "answer": "Lots of spelling mistakes and a strange domain" },
+
+    { "id": "l1-4.1-payment", "area": "4-transacting", "stem": "Which is generally the most secure way to pay online?",
+      "options": ["Bank transfer to a stranger", "Credit card or trusted payment service (e.g. PayPal)", "Send cash in the post", "Share your full bank details by email"], "answer": "Credit card or trusted payment service (e.g. PayPal)" },
+
+    { "id": "l1-4.1-comparison", "area": "4-transacting", "stem": "Why might you use a comparison site before buying a product?",
+      "options": ["To compare prices and features across retailers", "To buy more than one of everything", "To rate the seller", "To get a refund"], "answer": "To compare prices and features across retailers" },
+
+    { "id": "l1-4.2-cookies", "area": "4-transacting", "stem": "What is a cookie on a website?",
+      "options": ["A small file the site uses to remember information about you", "A type of virus", "An image format", "A printer setting"], "answer": "A small file the site uses to remember information about you" },
+
+    { "id": "l1-4.2-form-error", "area": "4-transacting",
+      "context": "An online form will not submit and shows a red message next to the email field.",
+      "stem": "What is the MOST LIKELY cause?",
+      "options": ["The email is in an invalid format", "Your printer is offline", "Your monitor is too small", "Your battery is low"], "answer": "The email is in an invalid format" },
+
+    { "id": "l1-5.5-eyestrain", "area": "5-safety", "stem": "What is a health risk of spending too much time online?",
+      "options": ["Increased energy levels", "Regular sleep patterns", "Eyestrain", "Weight loss"], "answer": "Eyestrain" },
+
+    { "id": "l1-5.5-screentime", "area": "5-safety", "stem": "Which is a good way to reduce eye strain when working on a screen?",
+      "options": ["Move closer to the screen", "Take regular breaks and look away", "Turn the brightness up to maximum", "Remove the light from the room"], "answer": "Take regular breaks and look away" },
+
+    { "id": "l1-5.5-posture", "area": "5-safety", "stem": "Which is good practice for posture at a desk?",
+      "options": ["Top of the screen roughly at eye level, feet flat on the floor", "Screen as low as possible, feet crossed", "Lean forward and squint", "Hold the laptop on your lap with knees up"], "answer": "Top of the screen roughly at eye level, feet flat on the floor" },
+
+    { "id": "l1-5.1-rtb", "area": "5-safety", "stem": "Which of these could you do as part of the 'right to be forgotten' in data protection law?",
+      "options": [
+        "Ask for a copy of your personal data held by a bank or business",
+        "Check if your data is accurate",
+        "Ask for your data to be processed lawfully",
+        "Check that your personal data that is no longer necessary has been deleted"
+      ], "answer": "Check that your personal data that is no longer necessary has been deleted" },
+
+    { "id": "l1-5.1-gdpr", "area": "5-safety", "stem": "Which UK law mainly protects how organisations use your personal data?",
+      "options": ["Computer Misuse Act", "UK GDPR / Data Protection Act", "Consumer Rights Act", "Highway Code"], "answer": "UK GDPR / Data Protection Act" },
+
+    { "id": "l1-5.4-malware", "area": "5-safety", "stem": "What should you do to reduce the risk of malware?",
+      "options": ["Restrict your GPS location", "Install anti-virus software", "Use a secondary email address", "Use tags in social media posts"], "answer": "Install anti-virus software" },
+
+    { "id": "l1-5.4-phishing-link", "area": "5-safety",
+      "context": "An email claims to be from your bank and asks you to click a link to 'verify' your account.",
+      "stem": "What is the safest action?",
+      "options": ["Click the link and enter your details", "Open your banking app or type the bank's address yourself", "Reply with your account number", "Forward to all contacts"],
+      "answer": "Open your banking app or type the bank's address yourself" },
+
+    { "id": "l1-5.2-password-attach", "area": "5-safety", "stem": "You need to email a colleague a document containing personal information. What is the best way to send it?",
+      "options": ["Send it in the body of the email", "Include the information in a password protected attachment", "Post it on social media", "Send through a public forum"],
+      "answer": "Include the information in a password protected attachment" },
+
+    { "id": "l1-5.2-2fa", "area": "5-safety", "stem": "What is two-factor authentication (2FA)?",
+      "options": ["A second check (e.g. a code on your phone) when you log in", "Two passwords on the same line", "Two email addresses", "Two computers"], "answer": "A second check (e.g. a code on your phone) when you log in" },
+
+    { "id": "l1-5.2-password-manager", "area": "5-safety", "stem": "What is a benefit of using a password manager?",
+      "options": ["You can have a unique strong password for every account without remembering them all", "It speeds up your Wi-Fi", "It backs up your photos", "It replaces antivirus"], "answer": "You can have a unique strong password for every account without remembering them all" },
+
+    { "id": "l1-5.3-backup", "area": "5-safety", "stem": "What is the main benefit of backing up files to the cloud?",
+      "options": ["The files can be recovered if your device is lost", "It makes the device run faster", "It removes viruses", "It saves printer ink"], "answer": "The files can be recovered if your device is lost" },
+
+    { "id": "l1-5.3-321-backup", "area": "5-safety", "stem": "The '3-2-1 backup rule' suggests how many copies of important files?",
+      "options": ["1 copy", "3 copies in total (2 on different media, 1 off-site)", "10 copies", "0 copies"], "answer": "3 copies in total (2 on different media, 1 off-site)" }
+  ]
+}

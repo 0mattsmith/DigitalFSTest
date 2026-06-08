@@ -1,0 +1,74 @@
+{
+  "name": "dfsq-practice",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Practice exam application for Pearson Digital Functional Skills (Entry Level 3 and Level 1)",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --enable-logging",
+    "build:win": "electron-builder --win --x64",
+    "build:win-portable": "electron-builder --win portable --x64",
+    "build:mac": "electron-builder --mac --x64 --arm64",
+    "build:all": "electron-builder -mw",
+    "release:win": "electron-builder --win --x64 --publish always",
+    "release:mac": "electron-builder --mac --x64 --arm64 --publish always",
+    "release:all": "electron-builder -mw --publish always"
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9"
+  },
+  "devDependencies": {
+    "electron": "^31.3.1",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.dfsq.practice",
+    "productName": "DFSQ Practice",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json",
+      "!**/.DS_Store",
+      "!**/Thumbs.db"
+    ],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "0mattsmith",
+        "repo": "DigitalFSTest",
+        "releaseType": "release"
+      }
+    ],
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ],
+      "artifactName": "DFSQ-Practice-${version}-${arch}.${ext}",
+      "publisherName": "DFSQ Practice"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "DFSQ Practice"
+    },
+    "portable": {
+      "artifactName": "DFSQ-Practice-${version}-portable.exe"
+    },
+    "mac": {
+      "category": "public.app-category.education",
+      "target": [
+        { "target": "dmg", "arch": ["x64", "arm64"] }
+      ],
+      "artifactName": "DFSQ-Practice-${version}-${arch}.${ext}"
+    }
+  },
+  "license": "UNLICENSED"
+}

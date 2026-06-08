@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; script-src 'self'; font-src 'self'" />
+  <title>DFSQ Practice</title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <div id="player" class="player">
+    <div class="player-titlebar">
+      <span class="tb-dot tb-dot-r"></span>
+      <span class="tb-dot tb-dot-y"></span>
+      <span class="tb-dot tb-dot-g"></span>
+      <span class="tb-title">Test Player Preview</span>
+      <span class="tb-spacer"></span>
+      <button id="tb-screenshot" class="tb-screenshot" title="Take a screenshot of this window (Cmd/Ctrl+Shift+S)" aria-label="Screenshot">
+        <svg class="tb-cam-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+          <path fill="currentColor" d="M9 3l-2 2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3l-2-2H9zm3 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+        </svg>
+        <span class="tb-cam-label">Screenshot</span>
+      </button>
+      <span class="tb-ctl tb-min">&minus;</span>
+      <span class="tb-ctl tb-max">&#9633;</span>
+      <span class="tb-ctl tb-close">&times;</span>
+    </div>
+
+    <div id="screen" class="screen"></div>
+
+    <div id="footerbar" class="footerbar">
+      <div class="fb-left">
+        <button class="fb-icon" title="Accessibility" aria-label="Accessibility">&#9737;</button>
+        <button class="fb-icon" title="Help" aria-label="Help">?</button>
+        <button class="fb-icon" title="Reset" aria-label="Reset">&#8634;</button>
+        <button class="fb-icon" title="Flag" aria-label="Flag">&#9873;</button>
+      </div>
+      <div class="fb-center">
+        <button id="btn-prev" class="orange-btn">&#9664; Previous</button>
+        <span id="page-counter" class="page-counter">&nbsp;</span>
+        <button id="btn-next" class="orange-btn">Next &#9654;</button>
+        <span id="timer" class="timer"><span class="hourglass">&#8987;</span><span id="timer-text">00:00</span></span>
+      </div>
+      <div class="fb-right">
+        <button id="btn-marks" class="orange-btn">Marks</button>
+        <button id="btn-save" class="orange-btn">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+# Node.js
+node_modules/
+package-lock.json
+
+# Build output
+dist/
+build/
+
+# Per-user data — student attempts and history should never be committed
+user-data/
+attempts/
+
+# OS junk
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.cursorrules
+
+# Logs
+*.log
+npm-debug.log*
+
+# Personal access tokens or env files — never commit these
+.env
+.env.*
+*.pem
+*.key
