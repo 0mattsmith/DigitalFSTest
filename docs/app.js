@@ -127,15 +127,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
 async function scheduleAutoSync() {
   if (!firebaseConfigured()) return;
-  const classCode = getStoredClassCode();
-  if (!classCode) return;
-  // Defer a few seconds so the sync doesn't slow down the home screen render
+  // No class-code gate any more — even if the student hasn't typed one,
+  // their past attempts upload under the "UNASSIGNED" bucket so the admin
+  // can see EVERYTHING in the all-time history.
   setTimeout(async () => {
     try {
+      const classCode = getStoredClassCode();   // may be empty
       const res = await syncAllHistory(classCode);
       if (res && res.uploaded > 0) {
-        // Tiny non-intrusive toast at the top so you know it worked
-        flashAutoSyncToast(res.uploaded, classCode);
+        flashAutoSyncToast(res.uploaded, res.classCode || classCode || 'UNASSIGNED');
       }
     } catch (err) {
       console.warn('[auto-sync] failed:', err);

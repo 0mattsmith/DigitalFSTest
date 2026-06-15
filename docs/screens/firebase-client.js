@@ -92,11 +92,20 @@ export async function uploadAttempt(attempt, classCode, opts = {}) {
 
 // Push every locally-saved attempt to Firestore. Returns counts so the
 // caller can show a progress / summary message.
+//
+// The class code is OPTIONAL — if not set, attempts upload under
+// "UNASSIGNED" so they still land in the admin's all-time history.
+// This means every result a student has ever taken on this device
+// makes it to the master dashboard regardless of whether the student
+// has filled in a class code.
+export const DEFAULT_CLASS_CODE = 'UNASSIGNED';
+
 export async function syncAllHistory(classCode, onProgress) {
-  if (!classCode) return { skipped: 'no class code' };
   if (!window.dfsq || !window.dfsq.listHistory) return { skipped: 'no history bridge' };
   const fb = await loadFirebase();
   if (!fb) return { skipped: 'firebase not configured' };
+
+  const effectiveCode = ((classCode || '').trim().toUpperCase()) || DEFAULT_CLASS_CODE;
 
   const hist = await window.dfsq.listHistory();
   const attempts = (hist && hist.attempts) || [];
@@ -107,7 +116,7 @@ export async function syncAllHistory(classCode, onProgress) {
     if (!a.totalMax || a.totalMax === 0) { skipped++; continue; }
     if (hasBeenUploaded(a.id)) { skipped++; continue; }
     try {
-      const summary = buildAttemptSummary(a, classCode);
+      const summary = buildAttemptSummary(a, effectiveCode);
       summary.attemptId = a.id || null;
       summary.backfilled = true;
       await fb.addDoc(fb.collection(fb.db, 'attempts'), summary);
@@ -118,7 +127,7 @@ export async function syncAllHistory(classCode, onProgress) {
       failed++;
     }
   }
-  return { uploaded, skipped, failed, total: attempts.length };
+  return { uploaded, skipped, failed, total: attempts.length, classCode: effectiveCode };
 }
 
 // Build the shape we actually send to Firestore. Includes summary,

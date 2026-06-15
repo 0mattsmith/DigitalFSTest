@@ -273,7 +273,7 @@ function renderLeaderboard() {
   for (const it of sorted) {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td>${fmtDate(it.finishedAt)}${it.backfilled ? ' <span class="pill" title="Past attempt backfilled from a student\\'s device">↑</span>' : ''}</td>
+      <td>${fmtDate(it.finishedAt)}${it.backfilled ? ' <span class="pill" title="Backfilled past attempt">↑</span>' : ''}</td>
       <td>${esc(it.studentName)}</td>
       ${showClass ? `<td class="mono">${esc(it.classCode || '—')}</td>` : ''}
       <td>${esc((it.level || '').toUpperCase())}</td>

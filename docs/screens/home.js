@@ -5,7 +5,7 @@ import { h, randomSeed, newAttemptId } from './components.js';
 import { renderA11yPanel } from './accessibility.js';
 import { manualCheck, getCurrentVersion } from './update-banner.js';
 import { canInstall, isStandalone, triggerInstall, manualInstallHint } from './install-prompt.js';
-import { isConfigured as firebaseConfigured, getStoredClassCode, setStoredClassCode } from './firebase-client.js';
+import { isConfigured as firebaseConfigured, getStoredClassCode, setStoredClassCode, syncAllHistory } from './firebase-client.js';
 
 export function showHome(api, state) {
   const screen = document.getElementById('screen');
@@ -28,11 +28,37 @@ export function showHome(api, state) {
   const nameInput = h('input', { type: 'text', placeholder: 'Your name', value: candidateName });
   const regInput = h('input', { type: 'text', placeholder: 'Registration / Student ID (optional)' });
   const centreInput = h('input', { type: 'text', placeholder: 'Centre number (optional)' });
+  // Debounced sync: when the user types a class code we trigger a sync
+  // shortly after they stop typing, so they don't have to reload the app
+  // for their past attempts to upload to your dashboard.
+  let syncTimer = null;
+  function scheduleSyncAfterTyping(code) {
+    if (syncTimer) clearTimeout(syncTimer);
+    if (!firebaseConfigured() || !code || code.length < 2) return;
+    syncTimer = setTimeout(async () => {
+      try {
+        const res = await syncAllHistory(code);
+        if (res && res.uploaded > 0) {
+          const t = h('div', { class: 'ub-toast' },
+            '↑ Synced ' + res.uploaded + ' past attempt' + (res.uploaded === 1 ? '' : 's') +
+            ' to class ' + code);
+          document.body.appendChild(t);
+          setTimeout(() => t.classList.add('is-leaving'), 3500);
+          setTimeout(() => t.remove(), 4000);
+        }
+      } catch (e) { console.warn('[classcode-sync] failed:', e); }
+    }, 1200);
+  }
+
   const classCodeInput = h('input', {
     type: 'text', placeholder: 'Class code (optional)',
     value: getStoredClassCode(),
     style: { textTransform: 'uppercase', fontFamily: 'Menlo,monospace' },
-    onInput: (e) => { setStoredClassCode(e.target.value); },
+    onInput: (e) => {
+      const code = (e.target.value || '').toUpperCase();
+      setStoredClassCode(code);
+      scheduleSyncAfterTyping(code);
+    },
   });
   const seedField = h('input', { type: 'text', value: seedInput, style: { fontFamily: 'Menlo,monospace' } });
 
