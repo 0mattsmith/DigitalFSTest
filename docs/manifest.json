@@ -1,0 +1,18 @@
+{
+  "name": "DFSQ Practice",
+  "short_name": "DFSQ Practice",
+  "description": "Practice the Pearson Edexcel Digital Functional Skills assessment at Entry Level 3 and Level 1.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#003057",
+  "theme_color": "#003057",
+  "categories": ["education", "productivity"],
+  "lang": "en-GB",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -75,6 +75,27 @@ export ELECTRON_BUILDER_BINARIES_MIRROR=https://npmmirror.com/mirrors/electron-b
 npm run build:win-portable
 ```
 
+## Progressive Web App (PWA)
+
+The web version is a fully-featured PWA. Students can:
+
+1. **Install it to their home screen** — on a phone, tablet, or desktop. After installing, it opens in its own window like a native app, no browser tabs or address bar.
+2. **Use it offline** — every screen, every question bank, every scenario, and every editor is cached on first visit. After that the app works with no internet at all. Perfect for revising on the train, on the bus, or anywhere with patchy signal.
+
+### How to install (per platform)
+
+- **iPhone / iPad (Safari):** open the site → tap the **Share** button → **Add to Home Screen**.
+- **Android (Chrome):** open the site → tap the menu (⋮) → **Add to home screen** (or look for the install prompt).
+- **Windows / Mac (Chrome / Edge):** look for the install icon (≡ or ⊕) in the right-hand side of the address bar → click → Install.
+
+Once installed, the app shows the navy DFSQ Practice icon, opens in its own window, and works without an internet connection.
+
+### How offline support works
+
+The site registers a service worker (`sw.js`) on first visit. The worker pre-caches the entire renderer, the question banks, the scenarios, all CSS and icons. On subsequent visits, all requests are served from cache first — if the cache has it, the page loads instantly even with no connection. If a new build is published, the next time the user opens the page on the internet the worker downloads the fresh files in the background and uses them on the next reload.
+
+Cache invalidation: each build of `build-web.js` stamps the service worker with the current timestamp, so a deploy automatically rolls out to every installed copy of the app the next time it gets online.
+
 ## Web version (GitHub Pages)
 
 The app can also run as a **pure browser app** with no install. Students just open a URL. All work is saved in the browser's local storage (per device, per browser).

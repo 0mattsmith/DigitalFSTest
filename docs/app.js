@@ -6,6 +6,7 @@ import { showSectionA } from './screens/section-a.js';
 import { showSectionB } from './screens/section-b.js';
 import { showResults } from './screens/results.js';
 import { showHistory } from './screens/history.js';
+import { showWorkOn } from './screens/work-on.js';
 import { captureWindow, showScreenshotModal, findCurrentScreenshotTask } from './screens/screenshot-tool.js';
 import { applyA11yToDocument } from './screens/accessibility.js';
 import { startUpdateListener } from './screens/update-banner.js';
@@ -24,6 +25,7 @@ const state = {
 const routes = {
   home: () => showHome(api, state),
   history: () => showHistory(api, state),
+  workOn: () => showWorkOn(api, state),
   sectionA: () => showSectionA(api, state),
   sectionB: () => showSectionB(api, state),
   results: () => showResults(api, state),

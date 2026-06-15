@@ -1,210 +1,325 @@
 {
   "level": "e3",
   "name": "Digital Functional Skills — Entry Level 3",
+  "_notes": "Section A is auto-marked knowledge test. Each topic maps to a content statement in the official Pearson DFSQ E3 specification (referenced in the area field). Wording follows the Pearson sample paper style: short stems, plausible distractors, contextual scenarios where useful.",
   "mcqs": [
-    { "id": "e3-1.1-output-device", "area": "1-devices", "stem": "Which one of these is an output device?",
+    { "id": "e3-1.1-output-1", "area": "1.1-devices",
+      "stem": "Which one of these is an output device?",
       "options": ["Microphone", "Mouse", "Printer", "Keyboard"], "answer": "Printer" },
 
-    { "id": "e3-1.1-input-device", "area": "1-devices", "stem": "Which of these is an input device?",
+    { "id": "e3-1.1-input-1", "area": "1.1-devices",
+      "stem": "Which of these is an input device?",
       "options": ["Speakers", "Monitor", "Keyboard", "Printer"], "answer": "Keyboard" },
 
-    { "id": "e3-1.1-both-device", "area": "1-devices", "stem": "Which of these is BOTH an input and output device?",
-      "options": ["Mouse", "Speakers", "Touchscreen", "Webcam"], "answer": "Touchscreen" },
+    { "id": "e3-1.1-input-2", "area": "1.1-devices",
+      "stem": "Which device is used to scan a paper photograph onto a computer?",
+      "options": ["Scanner", "Printer", "Webcam", "Microphone"], "answer": "Scanner" },
 
-    { "id": "e3-1.1-storage-device", "area": "1-devices", "stem": "Which of these is a storage device?",
+    { "id": "e3-1.1-input-3", "area": "1.1-devices",
+      "stem": "Which device would you use to record your voice for a podcast?",
+      "options": ["Speakers", "Microphone", "Monitor", "Mouse"], "answer": "Microphone" },
+
+    { "id": "e3-1.1-output-2", "area": "1.1-devices",
+      "stem": "Which device allows the user to hear sound from a computer?",
+      "options": ["Speakers", "Keyboard", "Webcam", "Touchpad"], "answer": "Speakers" },
+
+    { "id": "e3-1.1-storage", "area": "1.1-devices",
+      "stem": "Which of these is a portable storage device?",
       "options": ["USB memory stick", "Monitor", "Mouse", "Webcam"], "answer": "USB memory stick" },
 
-    { "id": "e3-1.1-headphones", "area": "1-devices", "stem": "Which device lets you listen to music privately?",
-      "options": ["Headphones", "Printer", "Scanner", "Mouse"], "answer": "Headphones" },
+    { "id": "e3-1.1-mobile", "area": "1.1-devices",
+      "stem": "Which device is best for taking photos and making calls on the move?",
+      "options": ["Smartphone", "Desktop computer", "Server", "Printer"], "answer": "Smartphone" },
 
-    { "id": "e3-1.1-scanner", "area": "1-devices", "stem": "Which device would you use to turn a paper photo into a digital file?",
-      "options": ["Printer", "Scanner", "Speaker", "Mouse"], "answer": "Scanner" },
+    { "id": "e3-1.1-touchscreen", "area": "1.1-devices",
+      "stem": "Which of these acts as both an input and an output device?",
+      "options": ["Touchscreen", "Mouse", "Speakers", "Webcam"], "answer": "Touchscreen" },
 
-    { "id": "e3-1.2-app-type", "area": "1-applications", "stem": "Which type of application would you use to write a letter?",
+    { "id": "e3-1.2-wp", "area": "1.2-applications",
+      "stem": "Which type of application would you use to write a letter?",
       "options": ["Spreadsheet", "Word processor", "Presentation", "Database"], "answer": "Word processor" },
 
-    { "id": "e3-1.2-app-type-2", "area": "1-applications", "stem": "Which application would you use to create a slideshow?",
+    { "id": "e3-1.2-presentation", "area": "1.2-applications",
+      "stem": "Which type of application would you use to create a slideshow?",
       "options": ["Word processor", "Spreadsheet", "Presentation software", "Web browser"], "answer": "Presentation software" },
 
-    { "id": "e3-1.2-spreadsheet", "area": "1-applications", "stem": "Which type of application is best to add up a list of numbers automatically?",
+    { "id": "e3-1.2-spreadsheet", "area": "1.2-applications",
+      "stem": "Which type of application is best to add up a list of numbers automatically?",
       "options": ["Web browser", "Word processor", "Spreadsheet", "Painting app"], "answer": "Spreadsheet" },
 
-    { "id": "e3-1.2-browser", "area": "1-applications", "stem": "Which application do you open to visit a website?",
+    { "id": "e3-1.2-browser", "area": "1.2-applications",
+      "stem": "Which application would you open to visit a website?",
       "options": ["Calculator", "Web browser", "Word processor", "Email client"], "answer": "Web browser" },
 
-    { "id": "e3-1.2-email-app", "area": "1-applications", "stem": "Which type of application would you use to send a message with an attached file?",
+    { "id": "e3-1.2-email", "area": "1.2-applications",
+      "stem": "Which type of application would you use to send a message with an attached file?",
       "options": ["Calculator", "Email client", "Painting app", "Music player"], "answer": "Email client" },
 
-    { "id": "e3-1.2-calc", "area": "1-applications", "stem": "Which app would you open to do a quick sum like 47 × 8?",
+    { "id": "e3-1.2-calculator", "area": "1.2-applications",
+      "stem": "Which application would you open to do a quick calculation like 47 × 8?",
       "options": ["Word processor", "Calculator", "Browser", "Camera"], "answer": "Calculator" },
 
-    { "id": "e3-1.3-accessibility", "area": "1-settings",
+    { "id": "e3-1.2-mediaplayer", "area": "1.2-applications",
+      "stem": "Which type of application would you use to watch a saved video file?",
+      "options": ["Spreadsheet", "Media player", "Email client", "Calculator"], "answer": "Media player" },
+
+    { "id": "e3-1.3-accessibility", "area": "1.3-settings",
       "context": "Your friend has a visual impairment.",
-      "stem": "Which system setting should you apply to help your friend?",
+      "stem": "Which system setting should you apply to help your friend use a computer?",
       "options": ["Devices", "Phone", "Network & Internet", "Ease of access"], "answer": "Ease of access" },
 
-    { "id": "e3-1.3-brightness", "area": "1-settings", "stem": "Which setting would you change to make the screen easier to see in bright sunlight?",
+    { "id": "e3-1.3-brightness", "area": "1.3-settings",
+      "stem": "Which setting would you change to make the screen easier to see in bright sunlight?",
       "options": ["Sound", "Display brightness", "Wi-Fi", "Bluetooth"], "answer": "Display brightness" },
 
-    { "id": "e3-1.3-volume", "area": "1-settings", "stem": "Which setting would you change to make a video louder?",
+    { "id": "e3-1.3-volume", "area": "1.3-settings",
+      "stem": "Which setting would you change to make a video louder?",
       "options": ["Volume", "Date and time", "Wallpaper", "Cellular data"], "answer": "Volume" },
 
-    { "id": "e3-1.3-bluetooth", "area": "1-settings", "stem": "Which setting do you turn on to connect a wireless speaker?",
+    { "id": "e3-1.3-bluetooth", "area": "1.3-settings",
+      "stem": "Which setting do you turn on to connect a wireless speaker?",
       "options": ["Bluetooth", "Aeroplane mode", "Do not disturb", "Storage"], "answer": "Bluetooth" },
 
-    { "id": "e3-1.3-airplane", "area": "1-settings", "stem": "Which setting should you turn ON during a flight to disable wireless connections?",
+    { "id": "e3-1.3-airplane", "area": "1.3-settings",
+      "stem": "Which setting should you turn ON during a flight to disable wireless connections?",
       "options": ["Aeroplane mode", "Mobile data", "Bluetooth", "Hotspot"], "answer": "Aeroplane mode" },
 
-    { "id": "e3-1.3-text-size", "area": "1-settings", "stem": "Which setting helps people who find small text hard to read?",
+    { "id": "e3-1.3-fontsize", "area": "1.3-settings",
+      "stem": "Which setting helps people who find small text hard to read?",
       "options": ["Increase font/text size", "Lower the volume", "Disable Wi-Fi", "Change the wallpaper"], "answer": "Increase font/text size" },
 
-    { "id": "e3-1.5-search", "area": "1-search", "stem": "What is the best way to search for information about a film?",
+    { "id": "e3-1.3-darkmode", "area": "1.3-settings",
+      "stem": "Which setting reduces eye strain when using a computer at night in a dark room?",
+      "options": ["Dark mode / Night light", "Maximum brightness", "Aeroplane mode", "Mute"], "answer": "Dark mode / Night light" },
+
+    { "id": "e3-1.5-search-film", "area": "1.5-search",
+      "stem": "What is the best way to search for information about a new film?",
       "options": ["Enter the film title in a search engine", "Open a spreadsheet", "Send an email", "Change Wi-Fi settings"],
       "answer": "Enter the film title in a search engine" },
 
-    { "id": "e3-1.5-search-engine-name", "area": "1-search", "stem": "Which of these is a search engine?",
+    { "id": "e3-1.5-engine", "area": "1.5-search",
+      "stem": "Which of these is a search engine?",
       "options": ["Outlook", "Google", "Word", "Excel"], "answer": "Google" },
 
-    { "id": "e3-1.5-better-keywords", "area": "1-search", "stem": "Which search will give the most useful results about traveling to Paris by train?",
+    { "id": "e3-1.5-better-keywords", "area": "1.5-search",
+      "stem": "Which search will give the most useful results about travelling to Paris by train?",
       "options": ["travel", "train Paris from London", "holiday", "trains"], "answer": "train Paris from London" },
 
-    { "id": "e3-1.5-history", "area": "1-search", "stem": "Where can you go to find a website you visited yesterday but did not bookmark?",
+    { "id": "e3-1.5-history", "area": "1.5-search",
+      "stem": "Where can you find a website you visited yesterday but did not bookmark?",
       "options": ["Browser history", "Recycle bin", "Camera roll", "Contacts"], "answer": "Browser history" },
 
-    { "id": "e3-1.5-bookmark", "area": "1-search", "stem": "What is the best way to save a website so you can find it again quickly?",
+    { "id": "e3-1.5-bookmark", "area": "1.5-search",
+      "stem": "What is the best way to save a website so you can find it again quickly?",
       "options": ["Bookmark / favourite it", "Take a photo of the screen", "Write the URL on paper", "Restart the device"], "answer": "Bookmark / favourite it" },
 
-    { "id": "e3-1.7-folders", "area": "1-files", "stem": "What do folders help you do on your computer?",
+    { "id": "e3-1.7-folders", "area": "1.7-files",
+      "stem": "What do folders help you do on your computer?",
       "options": ["Print documents", "Organise files", "Connect to Wi-Fi", "Make calls"], "answer": "Organise files" },
 
-    { "id": "e3-1.6-cloud-storage", "area": "1-files", "stem": "Where can you save a file so you can open it on another device?",
+    { "id": "e3-1.6-cloud", "area": "1.6-files",
+      "stem": "Where can you save a file so you can open it on another device?",
       "options": ["USB cable", "Cloud", "Recycle bin", "Mouse"], "answer": "Cloud" },
 
-    { "id": "e3-1.7-rename-file", "area": "1-files", "stem": "Which is the best file name for a CV you wrote in May 2026?",
-      "options": ["doc1.docx", "untitled.docx", "CV_May2026.docx", "asdfg.docx"], "answer": "CV_May2026.docx" },
+    { "id": "e3-1.7-rename", "area": "1.7-files",
+      "stem": "Which is the most suitable file name for a CV you wrote in May 2026?",
+      "options": ["doc1.docx", "untitled.docx", "CV_May_2026.docx", "asdfg.docx"], "answer": "CV_May_2026.docx" },
 
-    { "id": "e3-1.7-delete-recover", "area": "1-files", "stem": "You delete a file by mistake. Where can you usually find it to restore?",
+    { "id": "e3-1.7-delete", "area": "1.7-files",
+      "stem": "You delete a file by mistake. Where can you usually find it to restore?",
       "options": ["Recycle bin / Trash", "Wi-Fi settings", "Bluetooth menu", "Bookmarks bar"], "answer": "Recycle bin / Trash" },
 
-    { "id": "e3-1.7-copy-vs-move", "area": "1-files", "stem": "What is the difference between Copy and Cut when moving a file?",
+    { "id": "e3-1.7-copy-vs-move", "area": "1.7-files",
+      "stem": "What is the difference between Copy and Cut when moving a file?",
       "options": ["Copy keeps the original; Cut removes the original", "They are exactly the same", "Cut emails the file", "Copy deletes the original"], "answer": "Copy keeps the original; Cut removes the original" },
 
-    { "id": "e3-1.7-extension", "area": "1-files", "stem": "Which file extension is typically used for a Word document?",
+    { "id": "e3-1.7-ext-docx", "area": "1.7-files",
+      "stem": "Which file extension is used for a Microsoft Word document?",
       "options": [".docx", ".mp3", ".xlsx", ".png"], "answer": ".docx" },
 
-    { "id": "e3-1.7-image-ext", "area": "1-files", "stem": "Which file extension is for a picture?",
+    { "id": "e3-1.7-ext-image", "area": "1.7-files",
+      "stem": "Which file extension is for a picture?",
       "options": [".pdf", ".jpg", ".docx", ".csv"], "answer": ".jpg" },
 
-    { "id": "e3-1.8-no-sound", "area": "1-problems",
+    { "id": "e3-1.7-ext-music", "area": "1.7-files",
+      "stem": "Which file extension is for a music or audio file?",
+      "options": [".mp3", ".docx", ".xlsx", ".html"], "answer": ".mp3" },
+
+    { "id": "e3-1.8-no-sound", "area": "1.8-problems",
       "context": "The music that you have downloaded to your smartphone is playing, but you cannot hear anything from the speakers.",
       "stem": "Which action should you take?",
       "options": ["Check Cloud storage", "Check headphones are not plugged in", "Check copyright permission", "Check Wi-Fi connection"],
       "answer": "Check headphones are not plugged in" },
 
-    { "id": "e3-1.9-frozen", "area": "1-problems", "stem": "An app on your phone has frozen. What should you try first?",
+    { "id": "e3-1.8-frozen", "area": "1.8-problems",
+      "stem": "An app on your phone has frozen. What should you try first?",
       "options": ["Throw the phone away", "Close and reopen the app", "Reinstall the operating system", "Update your contacts"],
       "answer": "Close and reopen the app" },
 
-    { "id": "e3-1.9-no-wifi", "area": "1-problems", "stem": "Your laptop will not connect to the Wi-Fi at home. What is the FIRST thing to check?",
-      "options": ["Buy a new laptop", "That Wi-Fi is switched on and you have the password", "Replace the screen", "Reinstall the OS"], "answer": "That Wi-Fi is switched on and you have the password" },
+    { "id": "e3-1.8-wifi", "area": "1.8-problems",
+      "stem": "Your laptop will not connect to your home Wi-Fi. What is the FIRST thing to check?",
+      "options": ["Buy a new laptop", "That Wi-Fi is switched on and you have the password", "Replace the screen", "Reinstall the operating system"], "answer": "That Wi-Fi is switched on and you have the password" },
 
-    { "id": "e3-1.9-printer-error", "area": "1-problems", "stem": "Your printer says 'out of paper'. What should you do?",
+    { "id": "e3-1.8-system-vs-user", "area": "1.8-problems",
+      "context": "A document fails to print because the wrong tray is selected in the print menu.",
+      "stem": "What type of problem is this?",
+      "options": ["A system error caused by hardware failure", "A user error caused by an incorrect setting", "A virus", "A power cut"], "answer": "A user error caused by an incorrect setting" },
+
+    { "id": "e3-1.8-error-msg", "area": "1.8-problems",
+      "stem": "An app shows the message 'Server cannot be reached'. What does this most likely mean?",
+      "options": ["Your printer is out of paper", "There is a problem with your internet connection", "Your battery is low", "Your speakers are muted"], "answer": "There is a problem with your internet connection" },
+
+    { "id": "e3-1.9-printer-paper", "area": "1.9-problems",
+      "stem": "Your printer shows 'Out of paper'. What should you do?",
       "options": ["Add more paper to the tray", "Send an email to support", "Restart the computer", "Change your password"], "answer": "Add more paper to the tray" },
 
-    { "id": "e3-1.9-battery-low", "area": "1-problems", "stem": "Your laptop battery shows 5%. What should you do to keep working?",
+    { "id": "e3-1.9-battery", "area": "1.9-problems",
+      "stem": "Your laptop battery shows 5%. What should you do to keep working?",
       "options": ["Plug it in to charge", "Ignore the warning", "Run more apps", "Restart it without saving"], "answer": "Plug it in to charge" },
 
-    { "id": "e3-2.1-save-doc", "area": "2-creating", "stem": "What should you do regularly while typing a long document so you don't lose your work?",
-      "options": ["Save the document", "Close the program", "Open another app", "Turn the screen off"], "answer": "Save the document" },
+    { "id": "e3-1.9-storage-full", "area": "1.9-problems",
+      "stem": "Your phone shows 'Storage almost full'. What should you do?",
+      "options": ["Delete files or apps you no longer need", "Take more photos", "Buy a new phone immediately", "Ignore it"], "answer": "Delete files or apps you no longer need" },
 
-    { "id": "e3-2.1-undo", "area": "2-creating", "stem": "You accidentally delete a paragraph. Which command brings it back?",
-      "options": ["Undo (Ctrl+Z)", "Print (Ctrl+P)", "Save (Ctrl+S)", "Find (Ctrl+F)"], "answer": "Undo (Ctrl+Z)" },
-
-    { "id": "e3-2.1-spellcheck", "area": "2-creating", "stem": "Which feature in a word processor helps you find spelling mistakes?",
-      "options": ["Spell check", "Print preview", "Find and replace", "Page break"], "answer": "Spell check" },
-
-    { "id": "e3-2.1-bold", "area": "2-creating", "stem": "Which button do you use to make text BOLD?",
-      "options": ["B", "U", "I", "S"], "answer": "B" },
-
-    { "id": "e3-2.1-bullet-list", "area": "2-creating", "stem": "Which feature lets you make a simple list with dots in front of each item?",
-      "options": ["Bullet points", "Page numbers", "Spell check", "Footnotes"], "answer": "Bullet points" },
-
-    { "id": "e3-3.3-video-call", "area": "3-comms",
+    { "id": "e3-3.3-call-chat", "area": "3.3-video",
       "context": "The image shows a video call.",
       "stem": "Which icon should you click to send a message during the video call?",
       "options": ["Camera icon", "Microphone icon", "Speaker icon", "Chat bubble icon"], "answer": "Chat bubble icon" },
 
-    { "id": "e3-3.2-email-bcc", "area": "3-comms", "stem": "Which field hides recipients from each other when sending an email to many people?",
+    { "id": "e3-3.3-call-mute", "area": "3.3-video",
+      "stem": "During a video call, which icon would you click to mute your microphone?",
+      "options": ["Camera icon", "Microphone icon with a line through it", "Hand icon", "Settings cog"], "answer": "Microphone icon with a line through it" },
+
+    { "id": "e3-3.3-call-camera", "area": "3.3-video",
+      "stem": "During a video call, which icon would you click to turn off your camera?",
+      "options": ["Camera icon", "Microphone icon", "Chat bubble", "Speaker icon"], "answer": "Camera icon" },
+
+    { "id": "e3-3.3-call-join", "area": "3.3-video",
+      "stem": "What do you need to join a video call meeting?",
+      "options": ["The meeting link or code", "The host's home address", "The Wi-Fi password of the host", "A printed copy of the meeting"], "answer": "The meeting link or code" },
+
+    { "id": "e3-3.2-email-bcc", "area": "3.2-email",
+      "stem": "Which field hides recipients from each other when sending an email to many people?",
       "options": ["To", "Cc", "Bcc", "Subject"], "answer": "Bcc" },
 
-    { "id": "e3-3.2-subject-line", "area": "3-comms", "stem": "Why is the subject line of an email important?",
+    { "id": "e3-3.2-subject", "area": "3.2-email",
+      "stem": "Why is the subject line of an email important?",
       "options": ["It tells the reader what the email is about", "It changes the email's font", "It chooses the language", "It deletes the email"], "answer": "It tells the reader what the email is about" },
 
-    { "id": "e3-3.2-reply-all", "area": "3-comms", "stem": "What does the 'Reply all' button do?",
+    { "id": "e3-3.2-reply-all", "area": "3.2-email",
+      "stem": "What does the 'Reply all' button do?",
       "options": ["Sends your reply to everyone who received the original email", "Deletes the email for everyone", "Forwards the email to your contacts", "Sends only to yourself"], "answer": "Sends your reply to everyone who received the original email" },
 
-    { "id": "e3-3.2-attachment", "area": "3-comms", "stem": "How do you send a file with an email?",
-      "options": ["Use the Attach (paper clip) button", "Copy and paste the file into the To field", "Put the filename in the subject", "Restart the email app"], "answer": "Use the Attach (paper clip) button" },
+    { "id": "e3-3.2-attachment", "area": "3.2-email",
+      "stem": "How do you send a file with an email?",
+      "options": ["Use the Attach (paper clip) button", "Copy the file name into the To field", "Put the filename in the subject", "Restart the email app"], "answer": "Use the Attach (paper clip) button" },
 
-    { "id": "e3-3.2-email-tone", "area": "3-comms", "stem": "Which is the most appropriate greeting in an email to your tutor?",
+    { "id": "e3-3.2-tone", "area": "3.2-email",
+      "stem": "Which is the most appropriate greeting in an email to your tutor?",
       "options": ["yo", "Dear Tutor,", "wassup", "no greeting"], "answer": "Dear Tutor," },
 
-    { "id": "e3-3.4-footprint", "area": "3-comms", "stem": "Which of these contributes to your digital footprint?",
+    { "id": "e3-3.4-footprint-1", "area": "3.4-footprint",
+      "stem": "Which of these contributes to your digital footprint?",
       "options": ["Posting on social media", "Reading a book on paper", "Talking on a landline", "Writing in a notebook"], "answer": "Posting on social media" },
 
-    { "id": "e3-3.5-emoji", "area": "3-comms", "stem": "When is using lots of emojis usually NOT appropriate?",
+    { "id": "e3-3.4-footprint-2", "area": "3.4-footprint",
+      "stem": "What is a 'digital footprint'?",
+      "options": ["A type of malware", "A trail of information left online about you", "A folder of saved photos", "A printer setting"], "answer": "A trail of information left online about you" },
+
+    { "id": "e3-3.5-tone-emoji", "area": "3.2-email",
+      "stem": "When is using lots of emojis usually NOT appropriate?",
       "options": ["A friendly text to a friend", "A job application email", "A birthday message", "A chat with a sibling"], "answer": "A job application email" },
 
-    { "id": "e3-4.1-online-shop", "area": "4-transacting", "stem": "Which step is needed to buy something online?",
+    { "id": "e3-4.1-shop", "area": "4.1-transacting",
+      "stem": "Which step is needed to buy something online?",
       "options": ["Add the item to the basket and check out", "Print the website", "Send the seller a postcard", "Restart the device"], "answer": "Add the item to the basket and check out" },
 
-    { "id": "e3-4.2-verification", "area": "4-transacting", "stem": "Which of these helps a website check that a real person is filling in a form?",
+    { "id": "e3-4.2-captcha", "area": "4.2-verification",
+      "stem": "Which of these helps a website check that a real person is filling in a form?",
       "options": ["CAPTCHA test", "Subject line", "Footer image", "Background colour"], "answer": "CAPTCHA test" },
 
-    { "id": "e3-4.2-required", "area": "4-transacting", "stem": "On a form, what does a red asterisk (*) next to a field usually mean?",
+    { "id": "e3-4.2-required", "area": "4.1-transacting",
+      "stem": "On a form, what does a red asterisk (*) next to a field usually mean?",
       "options": ["The field is decorative", "The field is required and must be filled in", "The field is hidden", "The field is in a foreign language"], "answer": "The field is required and must be filled in" },
 
-    { "id": "e3-4.2-receipt", "area": "4-transacting", "stem": "After paying for something online, what should you keep as proof of purchase?",
+    { "id": "e3-4.2-receipt", "area": "4.1-transacting",
+      "stem": "After paying for something online, what should you keep as proof of purchase?",
       "options": ["The order confirmation / receipt", "The Wi-Fi password", "The shop's homepage", "The cookies notice"], "answer": "The order confirmation / receipt" },
 
-    { "id": "e3-5.2-personal", "area": "5-safety",
+    { "id": "e3-5.1-personal", "area": "5.2-personal-info",
       "context": "The image shows a person's social media settings with email, date of birth, location, public post notifications and image gallery.",
       "stem": "Which part of this image shows that this person has not protected their personal information?",
       "options": ["Email address (Only me)", "Date of Birth (Only me)", "Location (Public)", "Image Gallery (Only me)"],
       "answer": "Location (Public)" },
 
-    { "id": "e3-5.4-antivirus", "area": "5-safety", "stem": "What is a benefit of installing anti-virus software?",
+    { "id": "e3-5.4-antivirus", "area": "5.4-security-software",
+      "stem": "What is a benefit of installing anti-virus software?",
       "options": ["Sends spam email to junk", "Blocks unauthorised users", "Reduces risk of malware", "Allows users to send attachments"], "answer": "Reduces risk of malware" },
 
-    { "id": "e3-5.5-rsi", "area": "5-safety", "stem": "What should you do to reduce the effects of repetitive strain injury (RSI)?",
+    { "id": "e3-5.4-firewall", "area": "5.4-security-software",
+      "stem": "What is the main purpose of a firewall on a computer?",
+      "options": ["To make the screen brighter", "To block unauthorised network connections", "To increase Wi-Fi speed", "To clean the keyboard"], "answer": "To block unauthorised network connections" },
+
+    { "id": "e3-5.5-rsi", "area": "5.5-stress",
+      "stem": "What should you do to reduce the effects of repetitive strain injury (RSI)?",
       "options": ["Use a wrist rest", "Adjust the lighting", "Use a footrest", "Wear glasses"], "answer": "Use a wrist rest" },
 
-    { "id": "e3-5.3-2fa", "area": "5-safety",
+    { "id": "e3-5.5-posture", "area": "5.5-stress",
+      "stem": "Which is good practice for posture at a desk?",
+      "options": ["Sit with feet flat and screen at eye level", "Slouch with feet up on the desk", "Bend forward and squint", "Hold the screen 5 cm from your face"], "answer": "Sit with feet flat and screen at eye level" },
+
+    { "id": "e3-5.5-breaks", "area": "5.5-stress",
+      "stem": "What is a good habit to protect your eyes when working on a screen?",
+      "options": ["Take regular breaks and look away from the screen", "Sit closer to the screen", "Turn brightness to maximum", "Work in the dark"], "answer": "Take regular breaks and look away from the screen" },
+
+    { "id": "e3-5.3-2fa", "area": "5.3-authentication",
       "context": "CAPTCHA is one type of verification check used in an online form.",
       "stem": "What is another type of verification check?",
       "options": ["Instructions on an online form", "One time passcode", "The help feature on a form", "Submit and close button"], "answer": "One time passcode" },
 
-    { "id": "e3-5.1-online-safety", "area": "5-safety", "stem": "Which of these should you NOT share online with people you don't know?",
+    { "id": "e3-5.3-biometric", "area": "5.3-authentication",
+      "stem": "Which of these is a biometric authentication method?",
+      "options": ["A four-digit PIN", "Fingerprint or face recognition", "A long password", "An email address"], "answer": "Fingerprint or face recognition" },
+
+    { "id": "e3-5.3-pin-vs-password", "area": "5.3-authentication",
+      "stem": "Why are passwords usually safer than a short PIN for online accounts?",
+      "options": ["They are easier to remember", "They are much harder to guess", "They are quicker to type", "They use no letters"], "answer": "They are much harder to guess" },
+
+    { "id": "e3-5.1-share-online", "area": "5.1-safety",
+      "stem": "Which of these should you NOT share online with people you don't know?",
       "options": ["The weather", "Your home address", "A film you liked", "The colour of the sky"], "answer": "Your home address" },
 
-    { "id": "e3-5.2-strong-password", "area": "5-safety", "stem": "Which is the strongest password?",
+    { "id": "e3-5.2-strong-password", "area": "5.2-personal-info",
+      "stem": "Which is the strongest password?",
       "options": ["password123", "Tr0ub4dor&3", "12345678", "qwerty"], "answer": "Tr0ub4dor&3" },
 
-    { "id": "e3-5.2-share-password", "area": "5-safety", "stem": "Why should you NOT share your password with friends?",
+    { "id": "e3-5.2-share-password", "area": "5.2-personal-info",
+      "stem": "Why should you NOT share your password with friends?",
       "options": ["They could access your account and your personal information", "It uses extra data", "It will lock your phone", "It changes your screen colour"], "answer": "They could access your account and your personal information" },
 
-    { "id": "e3-5.2-phishing", "area": "5-safety",
+    { "id": "e3-5.2-phishing", "area": "5.2-personal-info",
       "context": "You receive an email saying you have won a prize. It asks you to click a link and enter your bank details.",
       "stem": "What should you do?",
       "options": ["Click the link and enter your details", "Forward it to all your friends", "Delete the email — it is likely a scam", "Reply with your password"], "answer": "Delete the email — it is likely a scam" },
 
-    { "id": "e3-5.4-update", "area": "5-safety", "stem": "Why is it important to install software updates?",
+    { "id": "e3-5.4-update", "area": "5.4-security-software",
+      "stem": "Why is it important to install software updates?",
       "options": ["They often fix security problems", "They make your screen bigger", "They add more storage", "They charge the battery"], "answer": "They often fix security problems" },
 
-    { "id": "e3-5.5-break", "area": "5-safety", "stem": "What is a good habit to protect your eyes when working on a screen?",
-      "options": ["Take regular breaks and look away from the screen", "Sit closer to the screen", "Turn brightness to maximum", "Work in the dark"], "answer": "Take regular breaks and look away from the screen" },
+    { "id": "e3-5.1-cyberbullying", "area": "5.1-safety",
+      "stem": "If someone is being unkind to you online, what is a sensible action?",
+      "options": ["Block them and tell a trusted adult", "Reply with rude messages", "Share their details publicly", "Pretend it isn't happening forever"], "answer": "Block them and tell a trusted adult" },
 
-    { "id": "e3-5.1-cyberbullying", "area": "5-safety", "stem": "If someone is being unkind to you online, what is a sensible action?",
-      "options": ["Block them and tell a trusted adult", "Reply with rude messages", "Share their details publicly", "Pretend it isn't happening forever"], "answer": "Block them and tell a trusted adult" }
+    { "id": "e3-5.1-respect", "area": "5.1-safety",
+      "stem": "Which of these is an example of respectful behaviour online?",
+      "options": ["Posting a kind comment under someone's photo", "Sending insulting messages", "Sharing private chats publicly", "Creating fake accounts to harass others"], "answer": "Posting a kind comment under someone's photo" },
+
+    { "id": "e3-3.1-contacts-add", "area": "3.1-contacts",
+      "stem": "Why might you add someone to your contacts list?",
+      "options": ["So you can easily call or message them again", "So your phone runs faster", "So they cannot contact you", "So your camera works better"], "answer": "So you can easily call or message them again" },
+
+    { "id": "e3-3.1-contacts-edit", "area": "3.1-contacts",
+      "stem": "Your friend has changed their phone number. What should you do in your contacts list?",
+      "options": ["Edit their existing contact and save the new number", "Delete the contact and never speak to them again", "Send them a postcard", "Change your Wi-Fi password"], "answer": "Edit their existing contact and save the new number" }
   ]
 }

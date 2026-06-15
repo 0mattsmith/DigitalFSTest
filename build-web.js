@@ -54,15 +54,28 @@ copyDir(path.join(ROOT, 'src', 'renderer'), OUT);
 // 2) Assets (banks, scenarios)
 copyDir(path.join(ROOT, 'assets'), path.join(OUT, 'assets'));
 
-// 3) Icon → favicon
+// 3) Icons — favicon + PWA sizes + maskable variant
 const iconPng = path.join(ROOT, 'build', 'icon.png');
 if (fs.existsSync(iconPng)) {
   fs.copyFileSync(iconPng, path.join(OUT, 'favicon.png'));
 }
+for (const name of ['icon-192.png', 'icon-512.png', 'icon-maskable-512.png']) {
+  const src = path.join(ROOT, 'build', name);
+  if (fs.existsSync(src)) fs.copyFileSync(src, path.join(OUT, name));
+}
 
-// 4) Web shell HTML + bridge polyfill
+// 4) Web shell HTML + bridge polyfill + PWA manifest + service worker
 fs.copyFileSync(path.join(ROOT, 'web', 'index.html'),    path.join(OUT, 'index.html'));
 fs.copyFileSync(path.join(ROOT, 'web', 'web-bridge.js'), path.join(OUT, 'web-bridge.js'));
+fs.copyFileSync(path.join(ROOT, 'web', 'manifest.json'), path.join(OUT, 'manifest.json'));
+
+// Stamp the service worker with a build version so that whenever we deploy,
+// every user's browser sees a fresh service worker, drops the old cache,
+// and re-precaches the new assets.
+const swSource = fs.readFileSync(path.join(ROOT, 'web', 'sw.js'), 'utf8');
+const buildVersion = new Date().toISOString().replace(/[:.]/g, '-');
+fs.writeFileSync(path.join(OUT, 'sw.js'),
+  swSource.replace('__BUILD_VERSION__', buildVersion));
 
 // 5) Skip Jekyll processing on GitHub Pages
 writeFile('.nojekyll', '');

@@ -30,6 +30,7 @@ export function showHome(api, state) {
 
   const startBtn = h('button', { class: 'orange-btn', onClick: start }, 'Start practice test ▶');
   const historyBtn = h('button', { class: 'btn-mini', onClick: () => api.go('history') }, 'View history');
+  const workOnBtn = h('button', { class: 'btn-mini', onClick: () => api.go('workOn') }, 'What to work on');
   const newSeedBtn = h('button', { class: 'btn-mini', onClick: () => { seedField.value = randomSeed(); } }, 'New seed');
 
   // ---- Level cards --------------------------------------------------------
@@ -148,7 +149,7 @@ export function showHome(api, state) {
       h('label', {}, 'Controls which questions/tasks you get. Share it to retake the same paper.'),
       h('div', { style: { display: 'flex', gap: '8px' } }, seedField, newSeedBtn)),
 
-    h('div', { class: 'actions' }, startBtn, historyBtn,
+    h('div', { class: 'actions' }, startBtn, workOnBtn, historyBtn,
       h('span', { class: 'muted', style: { marginLeft: 'auto' } }, 'Your work is saved locally.'))
   );
 

@@ -8,7 +8,18 @@ export function showSectionA(api, state) {
   screen.innerHTML = '';
 
   const rng = makeRng(state.test.seed + '|sectionA');
-  const bank = state.bank?.mcqs || [];
+  let bank = state.bank?.mcqs || [];
+
+  // Targeted practice mode: if the attempt has an areasFilter set, restrict
+  // the pool to questions from those skill areas only. Lets students drill
+  // their weak topics rather than spreading across every area.
+  if (state.attempt.areasFilter && state.attempt.areasFilter.length) {
+    const allowed = new Set(state.attempt.areasFilter);
+    const filtered = bank.filter(q => allowed.has(q.area));
+    if (filtered.length >= 3) bank = filtered;
+    // If the filter is too narrow (<3 matching questions) we fall back to
+    // the full bank rather than ship a stunted paper.
+  }
 
   // How many questions does the candidate want? Clamp to the bank size.
   const requested = state.attempt.mcqCount || 10;

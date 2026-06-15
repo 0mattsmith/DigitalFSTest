@@ -6,8 +6,16 @@
   <title>DFSQ Practice</title>
   <meta name="description" content="Practice exam application for Pearson Digital Functional Skills (Entry Level 3 and Level 1). Runs entirely in your browser — no install, no sign-up. All work saved locally." />
   <link rel="icon" href="favicon.png" />
-  <link rel="apple-touch-icon" href="favicon.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
   <link rel="stylesheet" href="styles/main.css" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#003057" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="DFSQ Practice" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 </head>
 <body>
   <div id="player" class="player">
@@ -66,5 +74,22 @@
 
   <!-- Reuse the same renderer module the Electron app uses. -->
   <script type="module" src="app.js"></script>
+
+  <!-- Register the service worker so the app works offline and can be
+       installed to the home screen as a PWA. Loaded after the main script
+       so the first run isn't delayed. -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('sw.js')
+          .then(function (reg) {
+            console.log('[dfsq] Service worker registered, scope:', reg.scope);
+          })
+          .catch(function (err) {
+            console.warn('[dfsq] Service worker registration failed:', err);
+          });
+      });
+    }
+  </script>
 </body>
 </html>
