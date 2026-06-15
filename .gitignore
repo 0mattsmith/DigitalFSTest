@@ -32,5 +32,8 @@ npm-debug.log*
 *.pem
 *.key
 
-# Firebase credentials — local copy only (template file IS committed)
-web/firebase-config.js
+# Firebase Web App config IS safe to commit (apiKey etc. are public —
+# security comes from Firestore Security Rules in firestore.rules).
+# Keep the file tracked so the GitHub Actions deploy can use it.
+# web/firebase-config.js  ← intentionally NOT ignored
+
