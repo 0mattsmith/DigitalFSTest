@@ -11,6 +11,7 @@ import { captureWindow, showScreenshotModal, findCurrentScreenshotTask } from '.
 import { applyA11yToDocument } from './screens/accessibility.js';
 import { startUpdateListener } from './screens/update-banner.js';
 import { canInstall, isStandalone, triggerInstall, manualInstallHint } from './screens/install-prompt.js';
+import { syncAllHistory, isConfigured as firebaseConfigured, getStoredClassCode } from './screens/firebase-client.js';
 
 // Shared session state. Each test has its own state object that the
 // individual screens read from and write into. Routes own their UI; this
@@ -118,7 +119,39 @@ window.addEventListener('DOMContentLoaded', () => {
   wireInstallButton();
 
   api.go('home');
+
+  // Auto-sync past attempts to Firestore once on every app start.
+  // Happens silently in the background; idempotent so it won't re-upload.
+  scheduleAutoSync();
 });
+
+async function scheduleAutoSync() {
+  if (!firebaseConfigured()) return;
+  const classCode = getStoredClassCode();
+  if (!classCode) return;
+  // Defer a few seconds so the sync doesn't slow down the home screen render
+  setTimeout(async () => {
+    try {
+      const res = await syncAllHistory(classCode);
+      if (res && res.uploaded > 0) {
+        // Tiny non-intrusive toast at the top so you know it worked
+        flashAutoSyncToast(res.uploaded, classCode);
+      }
+    } catch (err) {
+      console.warn('[auto-sync] failed:', err);
+    }
+  }, 2500);
+}
+
+function flashAutoSyncToast(count, classCode) {
+  const t = document.createElement('div');
+  t.className = 'ub-toast';
+  t.textContent = '↑ Synced ' + count + ' past attempt' + (count === 1 ? '' : 's') +
+                  ' to class ' + classCode;
+  document.body.appendChild(t);
+  setTimeout(() => t.classList.add('is-leaving'), 3500);
+  setTimeout(() => t.remove(), 4000);
+}
 
 function wireInstallButton() {
   const btn = document.getElementById('tb-install');

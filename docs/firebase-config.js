@@ -14,12 +14,11 @@
 // If this file is missing or any required field is empty, the Firebase
 // features (upload, teacher dashboard) are gracefully disabled and the
 // app continues to work entirely locally.
-const firebaseConfig = {
-  apiKey: "AIzaSyA1Qhf2hLUb07d-J3quMZ8v6py1udiLPaQ",
-  authDomain: "dfsq-practice.firebaseapp.com",
-  projectId: "dfsq-practice",
-  storageBucket: "dfsq-practice.firebasestorage.app",
-  messagingSenderId: "549846064716",
-  appId: "1:549846064716:web:f206236436e6ec30f51ee9",
-  measurementId: "G-88WZJWZXKC"
+window.FIREBASE_CONFIG = {
+  apiKey:            "",
+  authDomain:        "YOUR-PROJECT-ID.firebaseapp.com",
+  projectId:         "YOUR-PROJECT-ID",
+  storageBucket:     "YOUR-PROJECT-ID.appspot.com",
+  messagingSenderId: "",
+  appId:             ""
 };

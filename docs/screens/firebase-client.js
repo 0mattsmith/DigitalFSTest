@@ -50,19 +50,75 @@ async function loadFirebase() {
 
 // ---------------------------------------------------------------------------
 //  Student-side: upload an attempt summary after Section A / B finishes.
+//  Idempotent — re-uploading the same attemptId is a no-op (we track sent
+//  IDs in localStorage).
 // ---------------------------------------------------------------------------
-export async function uploadAttempt(attempt, classCode) {
+const UPLOADED_KEY = 'dfsq.uploadedAttempts.v1';
+
+function readUploaded() {
+  try { return new Set(JSON.parse(localStorage.getItem(UPLOADED_KEY) || '[]')); }
+  catch { return new Set(); }
+}
+function markUploaded(attemptId) {
+  if (!attemptId) return;
+  try {
+    const s = readUploaded();
+    s.add(attemptId);
+    localStorage.setItem(UPLOADED_KEY, JSON.stringify(Array.from(s)));
+  } catch {}
+}
+export function hasBeenUploaded(attemptId) {
+  return readUploaded().has(attemptId);
+}
+
+export async function uploadAttempt(attempt, classCode, opts = {}) {
   if (!classCode) return { skipped: 'no class code' };
+  if (!opts.force && attempt.id && hasBeenUploaded(attempt.id)) {
+    return { skipped: 'already uploaded' };
+  }
   const fb = await loadFirebase();
   if (!fb) return { skipped: 'firebase not configured' };
   try {
     const summary = buildAttemptSummary(attempt, classCode);
+    summary.attemptId = attempt.id || null;
     await fb.addDoc(fb.collection(fb.db, 'attempts'), summary);
+    markUploaded(attempt.id);
     return { ok: true };
   } catch (err) {
     console.warn('[firebase] upload failed:', err);
     return { error: err.message };
   }
+}
+
+// Push every locally-saved attempt to Firestore. Returns counts so the
+// caller can show a progress / summary message.
+export async function syncAllHistory(classCode, onProgress) {
+  if (!classCode) return { skipped: 'no class code' };
+  if (!window.dfsq || !window.dfsq.listHistory) return { skipped: 'no history bridge' };
+  const fb = await loadFirebase();
+  if (!fb) return { skipped: 'firebase not configured' };
+
+  const hist = await window.dfsq.listHistory();
+  const attempts = (hist && hist.attempts) || [];
+  let uploaded = 0, skipped = 0, failed = 0;
+  for (let i = 0; i < attempts.length; i++) {
+    const a = attempts[i];
+    onProgress && onProgress({ index: i + 1, total: attempts.length, attempt: a });
+    if (!a.totalMax || a.totalMax === 0) { skipped++; continue; }
+    if (hasBeenUploaded(a.id)) { skipped++; continue; }
+    try {
+      const summary = buildAttemptSummary(a, classCode);
+      summary.attemptId = a.id || null;
+      summary.backfilled = true;
+      await fb.addDoc(fb.collection(fb.db, 'attempts'), summary);
+      markUploaded(a.id);
+      uploaded++;
+    } catch (err) {
+      console.warn('[firebase] sync failed for', a.id, err);
+      failed++;
+    }
+  }
+  return { uploaded, skipped, failed, total: attempts.length };
 }
 
 // Build the shape we actually send to Firestore. Includes summary,

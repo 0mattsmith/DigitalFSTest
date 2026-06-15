@@ -23,10 +23,11 @@
   <main class="container">
     <section class="class-picker" id="class-picker">
       <h1>Class dashboard</h1>
-      <p class="muted">Enter the class code you've shared with your students. Their attempts will appear here in real time as they finish.</p>
+      <p class="muted">Enter a class code to see a specific group, or open the all-time history to view every attempt across every class.</p>
       <form id="class-form">
         <input id="class-code-input" type="text" placeholder="e.g. YR11-DFSQ" autocomplete="off" />
         <button class="primary" type="submit">Load class →</button>
+        <button id="all-classes-btn" type="button" class="ghost">View all-time history</button>
       </form>
       <div id="class-error" class="error hide"></div>
       <div id="firebase-warning" class="muted hide">
@@ -42,21 +43,41 @@
           <p class="muted" id="class-stats">No attempts yet</p>
         </div>
         <div class="dashboard-actions">
-          <button id="change-class" class="ghost">Change class</button>
+          <button id="change-class" class="ghost">Change view</button>
           <button id="export-csv"  class="ghost">Export CSV</button>
         </div>
       </header>
 
+      <!-- Filter bar: only shown in all-time/master view -->
+      <div id="filter-bar" class="filter-bar hide">
+        <input id="filter-search" type="search" placeholder="Search by student name…" />
+        <select id="filter-class">
+          <option value="">All classes</option>
+        </select>
+        <select id="filter-level">
+          <option value="">All levels</option>
+          <option value="e3">Entry Level 3</option>
+          <option value="l1">Level 1</option>
+        </select>
+        <select id="filter-grade">
+          <option value="">All grades</option>
+          <option value="Pass">Pass</option>
+          <option value="Not yet achieved">Not yet achieved</option>
+        </select>
+        <span class="muted small" id="filter-summary"></span>
+      </div>
+
       <div class="grid">
         <div class="panel">
-          <h3>Leaderboard</h3>
-          <p class="muted small">All attempts, most recent first. Sort by clicking a column.</p>
+          <h3 id="leaderboard-title">Leaderboard</h3>
+          <p class="muted small">Attempts, most recent first. Click a column to sort.</p>
           <div class="table-wrap">
             <table id="leaderboard">
               <thead>
                 <tr>
                   <th data-sort="finishedAt">Finished ↓</th>
                   <th data-sort="studentName">Student</th>
+                  <th data-sort="classCode" id="th-class">Class</th>
                   <th data-sort="level">Level</th>
                   <th data-sort="totalScore">Score</th>
                   <th data-sort="pct">%</th>
@@ -71,8 +92,8 @@
         </div>
 
         <div class="panel">
-          <h3>Class-wide weak topics</h3>
-          <p class="muted small">Aggregated across every attempt in this class. Topics with the lowest accuracy first.</p>
+          <h3 id="weak-title">Weak topics</h3>
+          <p class="muted small">Aggregated across every visible attempt. Topics with the lowest accuracy first.</p>
           <div id="weak-topics" class="weak-list"></div>
         </div>
       </div>

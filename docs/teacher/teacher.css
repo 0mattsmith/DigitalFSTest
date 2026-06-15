@@ -199,3 +199,31 @@ button {
 .weak-row.tier-weak      .weak-bar span { background: #b81f1f; }
 .weak-row.tier-improving .weak-bar span { background: #d9a300; }
 .weak-row.tier-strong    .weak-bar span { background: #168f3a; }
+
+/* Filter bar (master view only) */
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 18px;
+}
+.filter-bar input,
+.filter-bar select {
+  font-family: inherit;
+  font-size: 13px;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #fff;
+}
+.filter-bar input { min-width: 200px; }
+.filter-bar input:focus, .filter-bar select:focus {
+  outline: none; border-color: var(--navy);
+}
+#all-classes-btn { margin-left: 10px; }
+#th-class.hide { display: none; }
