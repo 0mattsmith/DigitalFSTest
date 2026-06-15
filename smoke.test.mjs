@@ -171,6 +171,7 @@ const expected = [
   ['src/renderer/screens/update-banner.js', /export function startUpdateListener/],
   ['src/main/auto-updater.js', /module\.exports = \{ setup, isReady \}/],
   ['src/renderer/screens/work-on.js', /export async function showWorkOn/],
+  ['src/renderer/screens/install-prompt.js', /export async function triggerInstall/],
 ];
 for (const [rel, re] of expected) {
   const p = path.join(__dirname, rel);

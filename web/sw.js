@@ -41,6 +41,7 @@ const PRECACHE = [
   'screens/accessibility.js',
   'screens/screenshot-tool.js',
   'screens/update-banner.js',
+  'screens/install-prompt.js',
   'editors/spreadsheet.js',
   'editors/docx-editor.js',
   'editors/email-editor.js',

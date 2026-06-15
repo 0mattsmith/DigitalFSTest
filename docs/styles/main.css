@@ -1364,3 +1364,47 @@ body.a11y-dark .work-on .sub { color: #aaa; }
   font-size: 12px;
 }
 .home-footer .spacer { flex: 1; }
+
+/* Install-as-PWA card on the home screen (web build only) */
+.home-install-row { margin-top: 16px; }
+.install-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #faf9f6;
+  border: 1px solid #e5e2db;
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 14px;
+}
+.install-card[open] { flex-direction: column; align-items: flex-start; }
+.install-card-ready {
+  background: #003057;
+  border-color: #003057;
+  color: #fff;
+}
+.install-card-ready strong { color: #fff; }
+.install-card-ready .muted { color: rgba(255,255,255,0.85); }
+.install-card-ready .orange-btn { margin-left: auto; }
+.install-icon {
+  font-size: 20px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.install-card:not(.install-card-ready) .install-icon { background: #e5e2db; }
+.install-card summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 600;
+}
+.install-card summary::-webkit-details-marker { display: none; }
+.install-hint {
+  margin-top: 10px;
+  color: #555;
+  font-size: 13px;
+  line-height: 1.5;
+}

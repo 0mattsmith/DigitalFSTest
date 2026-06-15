@@ -4,6 +4,7 @@
 import { h, randomSeed, newAttemptId } from './components.js';
 import { renderA11yPanel } from './accessibility.js';
 import { manualCheck, getCurrentVersion } from './update-banner.js';
+import { canInstall, isStandalone, triggerInstall, manualInstallHint } from './install-prompt.js';
 
 export function showHome(api, state) {
   const screen = document.getElementById('screen');
@@ -170,6 +171,40 @@ export function showHome(api, state) {
     h('span', { class: 'spacer' }),
     checkBtn);
   home.appendChild(footer);
+
+  // Install-as-app row. Only visible on the web build and only when the
+  // browser supports installation. Hidden once the app is running as an
+  // installed PWA.
+  if ((window.dfsq && window.dfsq.platform === 'web') && !isStandalone()) {
+    const installRow = h('div', { class: 'home-install-row', id: 'home-install-row' });
+    home.appendChild(installRow);
+    function renderInstallRow() {
+      installRow.innerHTML = '';
+      if (canInstall()) {
+        installRow.appendChild(h('div', { class: 'install-card install-card-ready' },
+          h('div', { class: 'install-icon' }, '⬇'),
+          h('div', { class: 'install-text' },
+            h('strong', {}, 'Install DFSQ Practice'),
+            h('div', { class: 'muted' }, 'Install to your home screen / desktop. Works offline once installed.')),
+          h('button', { class: 'orange-btn', onClick: async () => {
+            const result = await triggerInstall();
+            if (result !== 'accepted') renderInstallRow();
+          } }, 'Install app')));
+      } else {
+        installRow.appendChild(h('details', { class: 'install-card' },
+          h('summary', {},
+            h('span', { class: 'install-icon' }, '⬇'),
+            h('strong', {}, 'Install to home screen / desktop'),
+            h('span', { class: 'muted', style: { marginLeft: '8px', fontSize: '12px' } }, '(click to expand)')),
+          h('div', { class: 'install-hint' }, manualInstallHint())));
+      }
+    }
+    renderInstallRow();
+    // Re-render when the browser hands us the deferred prompt later in
+    // the page lifecycle.
+    window.addEventListener('dfsq:install-available', renderInstallRow);
+    window.addEventListener('dfsq:install-done',      renderInstallRow);
+  }
   getCurrentVersion().then((v) => {
     if (v) versionLabel.textContent = 'DFSQ Practice v' + v.version;
     else   versionLabel.textContent = 'DFSQ Practice (dev)';
