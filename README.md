@@ -96,31 +96,37 @@ The renderer doesn't need to know whether it's running in Electron or a browser 
 
 ### Building and deploying the web version
 
-From the project root:
+The project ships with a **GitHub Actions workflow** that auto-builds and deploys the web app on every push to `main`. After a one-time setup in the GitHub repo settings, you never need to touch `docs/` again — just push your source changes and the live site updates.
+
+**One-time setup in the repo:**
+
+1. Push the project to GitHub (including `.github/workflows/deploy-pages.yml`).
+2. Go to **Settings → Pages**.
+3. Under **Source** pick **GitHub Actions** (NOT "Deploy from a branch").
+4. That's it. The next push to `main` will run the workflow and deploy the site at `https://0mattsmith.github.io/DigitalFSTest/`.
+
+**To ship a new version of the web app:**
+
+```bash
+git add -A && git commit -m "Update content" && git push
+```
+
+The Actions workflow will:
+1. Check out the source
+2. Run `node build-web.js` to bundle `src/renderer/` + `assets/` + `web/` into `docs/`
+3. Upload that as a GitHub Pages artifact
+4. Publish it live
+
+You can watch each deploy in real-time at `https://github.com/0mattsmith/DigitalFSTest/actions`. Deploys typically take 30–60 seconds.
+
+**To build locally** (for testing before pushing):
 
 ```bash
 npm run build:web
+# Then serve docs/ with any static server, e.g.:
+cd docs && python3 -m http.server 8000
+# Open http://localhost:8000 in a browser
 ```
-
-That copies the renderer + assets + web shell into `./docs/`, ready to be served by GitHub Pages.
-
-To deploy:
-
-```bash
-npm run build:web
-git add docs
-git commit -m "Update web build"
-git push
-```
-
-Then, in GitHub once per repo:
-
-1. Go to **Settings → Pages**
-2. Under **Source** pick **Deploy from a branch**
-3. Branch: `main` · Folder: `/docs`
-4. Click **Save**
-
-GitHub will publish the site at `https://0mattsmith.github.io/DigitalFSTest/` within a minute. Every subsequent `git push` to `main` that includes `docs/` changes triggers a redeploy.
 
 ### Web-version limitations vs. Electron
 
