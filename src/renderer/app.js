@@ -10,6 +10,7 @@ import { showWorkOn } from './screens/work-on.js';
 import { captureWindow, showScreenshotModal, findCurrentScreenshotTask } from './screens/screenshot-tool.js';
 import { applyA11yToDocument } from './screens/accessibility.js';
 import { startUpdateListener } from './screens/update-banner.js';
+import { canInstall, isStandalone, triggerInstall } from './screens/install-prompt.js';
 
 // Shared session state. Each test has its own state object that the
 // individual screens read from and write into. Routes own their UI; this
@@ -109,8 +110,44 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Wire the title-bar Install button (web build only). Visible only when:
+  //  - we're running in a browser (not the Electron build),
+  //  - the app isn't already installed and running standalone,
+  //  - the browser has fired beforeinstallprompt (i.e. the OS will accept
+  //    an immediate install dialog).
+  wireInstallButton();
+
   api.go('home');
 });
+
+function wireInstallButton() {
+  const btn = document.getElementById('tb-install');
+  if (!btn) return;
+  const isWeb = window.dfsq && window.dfsq.platform === 'web';
+  // In the Electron build the title bar is real, not a fallback — leave the
+  // install button hidden permanently.
+  if (!isWeb) { btn.classList.add('hide'); return; }
+  if (isStandalone()) { btn.classList.add('hide'); return; }
+
+  function refresh() {
+    if (canInstall() && !isStandalone()) btn.classList.remove('hide');
+    else btn.classList.add('hide');
+  }
+  refresh();
+  window.addEventListener('dfsq:install-available', refresh);
+  window.addEventListener('dfsq:install-done', refresh);
+
+  btn.addEventListener('click', async () => {
+    const outcome = await triggerInstall();
+    // After acceptance the button disappears automatically via the
+    // 'appinstalled' event we listen to in install-prompt.js.
+    if (outcome === 'not-available') {
+      // Shouldn't reach here because the button is hidden in this state,
+      // but be defensive in case the event was consumed elsewhere.
+      btn.classList.add('hide');
+    }
+  });
+}
 
 function applyPlatformClass() {
   const p = (window.dfsq && window.dfsq.platform) || 'unknown';
