@@ -1137,6 +1137,131 @@ body.a11y-dyslexia button {
 body.a11y-dyslexia .q-stem, body.a11y-dyslexia .q-context { line-height: 1.8 !important; }
 
 /* ---------------------------------------------------------------------- */
+/*  "What do I need to work on?" screen                                  */
+/* ---------------------------------------------------------------------- */
+.work-on {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 16px 24px 60px;
+}
+.work-on h1 { color: #003057; margin: 0 0 4px; }
+.work-on .sub { color: #555; margin-bottom: 20px; }
+.work-on-level-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  gap: 8px;
+}
+.work-on-empty {
+  border: 1px dashed #c8c5be;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  background: #faf9f6;
+}
+.work-on-summary {
+  background: linear-gradient(to right, #003057 0%, #014b85 100%);
+  color: #fff;
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin-bottom: 22px;
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
+.work-on-summary-num {
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+.work-on-summary-text strong { font-size: 16px; }
+.work-on-summary-text .muted { color: rgba(255,255,255,0.75); }
+
+.work-on-areas {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 26px;
+}
+.work-on-area-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 2fr) 2fr auto auto;
+  gap: 14px;
+  align-items: center;
+  padding: 10px 14px;
+  background: #fff;
+  border: 1px solid #e1dfdd;
+  border-left: 5px solid #ccc;
+  border-radius: 6px;
+}
+.work-on-area-label strong { color: #222; font-size: 14px; }
+.work-on-area-stat { display: flex; flex-direction: column; gap: 4px; }
+.work-on-bar {
+  width: 100%;
+  height: 8px;
+  background: #f0eee9;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.work-on-bar-fill {
+  height: 100%;
+  transition: width 200ms ease;
+}
+.work-on-area-num {
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  color: #555;
+}
+.work-on-tier {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.work-on-missed {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.work-on-missed-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 14px;
+  background: #faf9f6;
+  border: 1px solid #e5e2db;
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.work-on-missed-ans .pill { font-size: 11px; }
+.work-on-missed-stem > div { line-height: 1.45; }
+
+.work-on-cta {
+  background: #003057;
+  color: #fff;
+  padding: 18px 22px;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+.work-on-cta h3 { margin: 0 0 6px; color: #ffc97a; }
+.work-on-cta .muted { color: rgba(255,255,255,0.78); }
+
+/* Dark-mode tweaks for the work-on screen */
+body.a11y-dark .work-on-area-row,
+body.a11y-dark .work-on-missed-row {
+  background: #25262a; border-color: #3a3b40;
+}
+body.a11y-dark .work-on-bar { background: #1c1d20; }
+body.a11y-dark .work-on-area-num { color: #aaa; }
+body.a11y-dark .work-on-empty { background: #1c1d20; border-color: #3a3b40; color: #ddd; }
+body.a11y-dark .work-on .sub { color: #aaa; }
+
+/* ---------------------------------------------------------------------- */
 /*  Update banner + toast                                                 */
 /* ---------------------------------------------------------------------- */
 .update-banner {

@@ -83,6 +83,7 @@ export async function showResults(api, state) {
     h('table', {}, ...bBreakdown),
     h('div', { class: 'actions', style: { marginTop: '20px' } },
       h('button', { class: 'orange-btn', onClick: () => api.go('home') }, 'New test'),
+      h('button', { class: 'orange-btn', onClick: () => api.go('workOn') }, 'What to work on ▶'),
       h('button', { class: 'btn-mini', onClick: () => api.go('history') }, 'View history'),
       h('button', { class: 'btn-mini', onClick: () => api.bridge.openAttemptFolder(state.attempt.id) }, 'Open saved files')));
   screen.appendChild(results);
