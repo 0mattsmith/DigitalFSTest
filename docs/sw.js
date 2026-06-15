@@ -14,7 +14,7 @@
 //   - On activation, old caches are deleted so the user's storage
 //     doesn't grow unbounded.
 
-const CACHE_VERSION = '2026-06-15T11-28-09-201Z';   // replaced by build-web.js
+const CACHE_VERSION = '2026-06-15T11-54-15-706Z';   // replaced by build-web.js
 const CACHE_NAME = 'dfsq-' + CACHE_VERSION;
 
 // Files we want available offline as soon as the SW installs.
@@ -85,35 +85,68 @@ self.addEventListener('fetch', (event) => {
   // CORS dance and breaks them when offline anyway.
   if (url.origin !== self.location.origin) return;
 
-  event.respondWith(
-    caches.match(req).then((cached) => {
-      if (cached) {
-        // Refresh in the background so the cache stays fresh while the
-        // user gets an instant response.
-        fetch(req).then((res) => {
-          if (res.ok) caches.open(CACHE_NAME).then((c) => c.put(req, res));
-        }).catch(() => {});
-        return cached;
-      }
-      return fetch(req).then((res) => {
-        // Cache successful same-origin responses for next time.
-        if (res.ok) {
-          const clone = res.clone();
-          caches.open(CACHE_NAME).then((c) => c.put(req, clone));
-        }
-        return res;
-      }).catch(() => {
-        // Offline AND nothing cached for this URL — return a basic
-        // offline page for navigations so the user sees something.
-        if (req.mode === 'navigate') {
-          return caches.match('index.html');
-        }
-        return new Response('Offline and no cache for ' + url.pathname,
-          { status: 503, statusText: 'Offline' });
-      });
-    })
-  );
+  // Strategy:
+  //   - Code files (JS, CSS, HTML) and navigations → NETWORK-FIRST.
+  //     This means deploys propagate to clients on the very next page
+  //     load, not the load after. Falls back to cache when offline so
+  //     PWA still works without a connection.
+  //   - Everything else (icons, banks, scenarios, manifest, sw.js
+  //     itself) → CACHE-FIRST. Static data is fine to serve from cache,
+  //     and the cache is invalidated as a unit by the BUILD_VERSION
+  //     stamp on every deploy.
+  const path = url.pathname;
+  const isCode = path === '/' ||
+                 path.endsWith('/') ||
+                 /\.(js|css|html)$/i.test(path) ||
+                 req.mode === 'navigate';
+
+  if (isCode) {
+    event.respondWith(networkFirst(req));
+  } else {
+    event.respondWith(cacheFirst(req));
+  }
 });
+
+async function networkFirst(req) {
+  try {
+    const res = await fetch(req);
+    if (res.ok) {
+      const clone = res.clone();
+      caches.open(CACHE_NAME).then((c) => c.put(req, clone)).catch(() => {});
+    }
+    return res;
+  } catch (err) {
+    const cached = await caches.match(req);
+    if (cached) return cached;
+    if (req.mode === 'navigate') {
+      const shell = await caches.match('index.html');
+      if (shell) return shell;
+    }
+    return new Response('Offline and no cache for ' + new URL(req.url).pathname,
+      { status: 503, statusText: 'Offline' });
+  }
+}
+
+async function cacheFirst(req) {
+  const cached = await caches.match(req);
+  if (cached) {
+    // Refresh in the background for next time
+    fetch(req).then((res) => {
+      if (res.ok) caches.open(CACHE_NAME).then((c) => c.put(req, res)).catch(() => {});
+    }).catch(() => {});
+    return cached;
+  }
+  try {
+    const res = await fetch(req);
+    if (res.ok) {
+      const clone = res.clone();
+      caches.open(CACHE_NAME).then((c) => c.put(req, clone)).catch(() => {});
+    }
+    return res;
+  } catch {
+    return new Response('Offline', { status: 503 });
+  }
+}
 
 // Optional: allow the page to ping the SW to check status.
 self.addEventListener('message', (event) => {
