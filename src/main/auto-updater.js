@@ -35,6 +35,13 @@ function loadUpdater() {
   }
 }
 
+// Are we running a portable Windows build? electron-builder sets this env
+// var when the portable .exe self-extracts. Portable builds cannot replace
+// themselves while running, so auto-install would fail silently.
+const isPortableWindows = !!process.env.PORTABLE_EXECUTABLE_DIR;
+
+const RELEASE_URL = 'https://github.com/0mattsmith/DigitalFSTest/releases';
+
 function setup(win) {
   mainWindow = win;
   const autoUpdater = loadUpdater();
@@ -58,10 +65,18 @@ function setup(win) {
 
   autoUpdater.on('checking-for-update',  () => send('checking'));
   autoUpdater.on('update-not-available', (info) => send('up-to-date', { currentVersion: app.getVersion(), latestVersion: info?.version }));
-  autoUpdater.on('update-available',     (info) => send('available', { version: info.version, releaseNotes: info.releaseNotes }));
+  autoUpdater.on('update-available',     (info) => {
+    if (isPortableWindows) {
+      // Portable can't self-install; tell the renderer to show the
+      // "manual install needed" banner with an Open-GitHub button.
+      send('portable-update', { version: info.version, url: RELEASE_URL });
+    } else {
+      send('available', { version: info.version, releaseNotes: info.releaseNotes });
+    }
+  });
   autoUpdater.on('download-progress',    (p) => send('downloading', { percent: Math.round(p.percent), bytesPerSecond: p.bytesPerSecond, transferred: p.transferred, total: p.total }));
   autoUpdater.on('update-downloaded',    (info) => send('downloaded', { version: info.version }));
-  autoUpdater.on('error',                (err) => send('error', { message: (err && err.message) || String(err) }));
+  autoUpdater.on('error',                (err) => send('error', { message: (err && err.message) || String(err), url: RELEASE_URL }));
 
   // --- IPC ---------------------------------------------------------------
   ipcMain.handle('updates:check', async () => {
@@ -75,11 +90,17 @@ function setup(win) {
   });
 
   ipcMain.handle('updates:download', async () => {
+    if (isPortableWindows) {
+      // Portable build — there's nothing useful to download; the user
+      // needs to grab the new portable .exe from GitHub manually.
+      send('portable-update', { version: 'latest', url: RELEASE_URL });
+      return { ok: false, error: 'portable-build-cannot-self-update' };
+    }
     try {
       const r = await autoUpdater.downloadUpdate();
       return { ok: true, paths: r };
     } catch (err) {
-      send('error', { message: err.message });
+      send('error', { message: err.message, url: RELEASE_URL });
       return { ok: false, error: err.message };
     }
   });

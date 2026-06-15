@@ -149,6 +149,15 @@ ipcMain.handle('shell:openExternalFile', async (_evt, fullPath) => {
   return { ok: result === '', error: result || undefined };
 });
 
+ipcMain.handle('shell:openUrl', async (_evt, url) => {
+  // Only allow http(s) URLs to avoid being used to launch arbitrary protocols.
+  if (typeof url !== 'string' || !/^https?:\/\//i.test(url)) {
+    return { ok: false, error: 'Invalid URL' };
+  }
+  await shell.openExternal(url);
+  return { ok: true };
+});
+
 ipcMain.handle('shell:exportToDownloads', async (_evt, payload) => {
   // Lets a student export an edited document to a chosen location.
   const { defaultName, content, encoding } = payload;

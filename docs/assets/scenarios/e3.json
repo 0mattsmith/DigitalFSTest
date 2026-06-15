@@ -1,0 +1,548 @@
+{
+  "level": "e3",
+  "scenarios": [
+    {
+      "id": "e3-work-experience",
+      "title": "Work experience: information for your tutor",
+      "scenario": "You are looking for work experience. Your tutor has asked you to find some information and email it to them.",
+      "briefHtml": "<p><strong>From:</strong> tutor@samsdfs.biz<br><strong>Subject:</strong> Work experience research</p><p>Hi,</p><p>Please find out the National Minimum Wage rate for apprentices aged 16–18 years and email me the information. Also add two contacts to your email contact list so we can keep in touch.</p><p>Thanks,<br>Your tutor</p>",
+      "tasks": [
+        {
+          "id": "A1",
+          "label": "A1",
+          "marks": 1,
+          "brief": "Use a search engine to find the National Minimum Wage rate for apprentices aged 16–18 years. Record the search terms you used and the information you found.",
+          "kind": "search",
+          "prompt": "Open a search engine and search for the apprentice National Minimum Wage rate.",
+          "criteria": [
+            { "test": "searchHasTerm", "text": "minimum wage", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A2",
+          "label": "A2",
+          "marks": 2,
+          "brief": "Record the website you used and the current rate you found. For practice, accept any reasonable rate found.",
+          "kind": "form",
+          "fields": [
+            { "name": "website", "label": "Website you used", "type": "text", "required": true },
+            { "name": "rate", "label": "National Minimum Wage rate for apprentices (16–18)", "type": "text", "placeholder": "e.g. £6.40" }
+          ],
+          "criteria": [
+            { "test": "formFieldEquals", "field": "website", "value": "", "marks": 0 },
+            { "test": "emailHasField", "field": "website", "regex": "^https?://|\\.(co\\.uk|gov\\.uk|com)", "marks": 1 },
+            { "test": "emailHasField", "field": "rate", "regex": "\\d", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A3",
+          "label": "A3",
+          "marks": 1,
+          "brief": "Take a screenshot showing your search engine with the search criteria entered.",
+          "kind": "screenshot",
+          "prompt": "Upload a screenshot of the search engine with your search terms visible.",
+          "criteria": [
+            { "test": "hasScreenshots", "min": 1, "marks": 1 }
+          ]
+        },
+        {
+          "id": "A4",
+          "label": "A4",
+          "marks": 1,
+          "brief": "Add two contacts to your email contact list: your tutor (tutor@samsdfs.biz) and another classmate of your choice.",
+          "kind": "contacts",
+          "criteria": [
+            { "test": "hasContact", "email": "tutor@samsdfs.biz", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A5",
+          "label": "A5",
+          "marks": 5,
+          "brief": "Send an email to your tutor (tutor@samsdfs.biz) with the information you found. Include a clear subject line, a polite greeting and close, and attach a document with the information.",
+          "kind": "email",
+          "contacts": [ { "name": "Tutor", "email": "tutor@samsdfs.biz" } ],
+          "criteria": [
+            { "test": "emailHasField", "field": "to", "contains": ["tutor@samsdfs.biz"], "marks": 1 },
+            { "test": "emailHasField", "field": "subject", "regex": "(work|experience|evidence|information|wage)", "marks": 1 },
+            { "test": "emailHasField", "field": "body", "regex": "(dear|hello|hi)", "marks": 1 },
+            { "test": "emailHasField", "field": "body", "regex": "(regards|thanks|thank you)", "marks": 1 },
+            { "test": "emailWasSent", "marks": 1 }
+          ]
+        },
+        {
+          "id": "B1",
+          "label": "B1",
+          "marks": 5,
+          "brief": "Open the WORK EXPERIENCE form below and complete it with the details given in the brief.",
+          "kind": "form",
+          "fields": [
+            { "name": "password", "label": "Choose a password", "type": "password", "help": "Use: 23samsv2&dfs" },
+            { "name": "name", "label": "Your name", "type": "text" },
+            { "name": "dob", "label": "Date of birth", "type": "text", "placeholder": "DD/MM/YYYY", "help": "Use: 09/06/2005" },
+            { "name": "phone", "label": "Phone number", "type": "tel", "help": "Use: 01632 960455" },
+            { "name": "email", "label": "Email address", "type": "email", "help": "Use: fran@samsdfs.biz" },
+            { "name": "department", "label": "Preferred department", "type": "select", "options": ["", "Reception", "Office", "Warehouse", "Retail"] },
+            { "name": "weeks", "label": "Number of weeks", "type": "text", "help": "Use: 6" }
+          ],
+          "criteria": [
+            { "test": "formFieldEquals", "field": "password", "value": "23samsv2&dfs", "marks": 1 },
+            { "test": "formFieldEquals", "field": "name", "value": "Fran Fouraud", "marks": 1 },
+            { "test": "formFieldEquals", "field": "phone", "value": "01632 960455", "marks": 1 },
+            { "test": "formFieldEquals", "field": "department", "value": "Office", "marks": 1 },
+            { "test": "formFieldEquals", "field": "weeks", "value": "6", "marks": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e3-apprenticeships-flyer",
+      "title": "Apprenticeships poster",
+      "scenario": "A local business wants you to update an apprenticeships flyer.",
+      "briefHtml": "<p>Your manager has asked you to update the flyer. Please:</p><ul><li>Add a phone number and email address to slide 1.</li><li>Change the deadline from July to August.</li><li>Add today's date.</li><li>Make the title APPRENTICESHIPS ON OFFER stand out (size 48, red).</li><li>Make the body text easy to read.</li></ul>",
+      "tasks": [
+        {
+          "id": "B1",
+          "label": "B1",
+          "marks": 4,
+          "brief": "Update slide 1 with the missing contact details and the new deadline. Insert today's date.",
+          "kind": "document",
+          "initialHtml": "<h1>APPRENTICESHIPS ON OFFER</h1><p>We are now recruiting apprentices for our local business.</p><p>Deadline: <strong>July 2026</strong></p><p>Telephone: <em>add phone here</em></p><p>Email: <em>add email here</em></p>",
+          "criteria": [
+            { "test": "docContains", "text": "0800 015 0400", "marks": 1 },
+            { "test": "docContains", "text": "help@service.gov.uk", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "august", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "2026|2025|2024", "marks": 1 }
+          ]
+        },
+        {
+          "id": "B2",
+          "label": "B2",
+          "marks": 4,
+          "brief": "Make the title APPRENTICESHIPS ON OFFER size 48 and red. Use a clear body font size. Left-align the body text.",
+          "kind": "document",
+          "initialHtml": "<h1>APPRENTICESHIPS ON OFFER</h1><p>Body text goes here.</p>",
+          "criteria": [
+            { "test": "docMatchesRegex", "regex": "color: ?red|color:#ff0000|color: ?#ff0000", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "font-size:.{0,4}(48|36|24)", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "text-align: ?left|justifyleft", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "<(b|strong|i|em|u)>|font-weight|underline", "marks": 1 }
+          ]
+        },
+        {
+          "id": "B3",
+          "label": "B3",
+          "marks": 2,
+          "brief": "Take a screenshot showing your finished flyer.",
+          "kind": "screenshot",
+          "prompt": "Upload a screenshot of the finished flyer.",
+          "criteria": [
+            { "test": "hasScreenshots", "min": 1, "marks": 2 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e3-friend-event",
+      "title": "Plan an event for a friend",
+      "scenario": "Your friend is moving away and you want to organise a small leaving event.",
+      "briefHtml": "<p>You want to organise a leaving party for your friend. Please:</p><ul><li>Search online for a suitable venue.</li><li>Email three friends to invite them.</li><li>Take screenshots showing how you set the To, Cc and Bcc fields correctly.</li></ul>",
+      "tasks": [
+        {
+          "id": "A1",
+          "label": "A1",
+          "marks": 1,
+          "brief": "Search online for a venue near you.",
+          "kind": "search",
+          "prompt": "Enter search terms relevant to finding a small leaving party venue.",
+          "criteria": [
+            { "test": "searchHasTerm", "text": "venue", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A2",
+          "label": "A2",
+          "marks": 4,
+          "brief": "Send an invitation email. Add at least one address to To and another to Cc. Bcc one person who you don't want others to see.",
+          "kind": "email",
+          "criteria": [
+            { "test": "emailHasField", "field": "to", "regex": "@", "marks": 1 },
+            { "test": "emailHasField", "field": "cc", "regex": "@", "marks": 1 },
+            { "test": "emailHasField", "field": "bcc", "regex": "@", "marks": 1 },
+            { "test": "emailWasSent", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A3",
+          "label": "A3",
+          "marks": 2,
+          "brief": "Take a screenshot showing how to add a Cc and Bcc recipient in your email client.",
+          "kind": "screenshot",
+          "prompt": "Upload a screenshot showing Cc and Bcc fields in the email composer.",
+          "criteria": [
+            { "test": "hasScreenshots", "min": 1, "marks": 2 }
+          ]
+        },
+        {
+          "id": "B1",
+          "label": "B1",
+          "marks": 3,
+          "brief": "Create a short document for the venue with the date, time and number of guests.",
+          "kind": "document",
+          "initialHtml": "<h2>Leaving party plan</h2><p>Date: </p><p>Time: </p><p>Number of guests: </p>",
+          "criteria": [
+            { "test": "docMatchesRegex", "regex": "date.{0,40}\\d", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "time.{0,40}\\d", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "guests.{0,20}\\d", "marks": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e3-buy-laptop",
+      "title": "Researching a laptop",
+      "scenario": "You are saving up to buy a laptop. Research a model and tell a family member by email.",
+      "briefHtml": "<p>Please:</p><ul><li>Search for a laptop under £500.</li><li>Take a screenshot showing one suitable model.</li><li>Email a family member with the details and ask their opinion.</li></ul>",
+      "tasks": [
+        {
+          "id": "A1",
+          "label": "A1",
+          "marks": 1,
+          "brief": "Search online for laptops under £500.",
+          "kind": "search",
+          "prompt": "Enter search terms.",
+          "criteria": [
+            { "test": "searchHasTerm", "text": "laptop", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A2",
+          "label": "A2",
+          "marks": 2,
+          "brief": "Record one suitable laptop you found: make/model and price.",
+          "kind": "form",
+          "fields": [
+            { "name": "model", "label": "Make and model", "type": "text" },
+            { "name": "price", "label": "Price", "type": "text", "placeholder": "e.g. £449.99" }
+          ],
+          "criteria": [
+            { "test": "emailHasField", "field": "model", "regex": ".{3,}", "marks": 1 },
+            { "test": "emailHasField", "field": "price", "regex": "£|\\d", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A3",
+          "label": "A3",
+          "marks": 1,
+          "brief": "Take a screenshot of the product page.",
+          "kind": "screenshot",
+          "prompt": "Upload a screenshot of the laptop product page.",
+          "criteria": [
+            { "test": "hasScreenshots", "min": 1, "marks": 1 }
+          ]
+        },
+        {
+          "id": "A4",
+          "label": "A4",
+          "marks": 4,
+          "brief": "Email a family member with the details. Include a polite greeting and close. Suggested address: family@samsdfs.biz",
+          "kind": "email",
+          "criteria": [
+            { "test": "emailHasField", "field": "to", "regex": "@", "marks": 1 },
+            { "test": "emailHasField", "field": "subject", "regex": ".{3,}", "marks": 1 },
+            { "test": "emailHasField", "field": "body", "regex": "(dear|hi|hello)", "marks": 1 },
+            { "test": "emailWasSent", "marks": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e3-tidy-files",
+      "title": "Tidy your work folder",
+      "scenario": "Your tutor has asked you to organise the files for your portfolio.",
+      "briefHtml": "<p>Create folders called Year1 and Year2. Inside Year1, create a subfolder called Maths.</p><p>Save the work plan as a Word document.</p>",
+      "tasks": [
+        {
+          "id": "B1",
+          "label": "B1",
+          "marks": 3,
+          "brief": "Create the folder structure shown in the brief.",
+          "kind": "file-management",
+          "prompt": "Create folders and a subfolder as required by the brief.",
+          "criteria": [
+            { "test": "fileManagementHasFolder", "name": "Year1", "marks": 1 },
+            { "test": "fileManagementHasFolder", "name": "Year2", "marks": 1 },
+            { "test": "fileManagementHasSubfolder", "name": "Maths", "marks": 1 }
+          ]
+        },
+        {
+          "id": "B2",
+          "label": "B2",
+          "marks": 2,
+          "brief": "Write a short note about what each folder is for in a Word-style document.",
+          "kind": "document",
+          "initialHtml": "<h2>My work folder plan</h2><p></p>",
+          "criteria": [
+            { "test": "docMatchesRegex", "regex": "year1.{0,80}", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "year2.{0,80}", "marks": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e3-college-enrolment",
+      "title": "College enrolment form",
+      "scenario": "You are enrolling at a local college. Complete the online enrolment form and email a copy of your details to the admissions team.",
+      "briefHtml": "<p><strong>From:</strong> admissions@samsdfs.biz<br><strong>Subject:</strong> Please enrol</p><p>Please complete the enrolment form with the candidate details below, then email us at admissions@samsdfs.biz so we know it is done.</p><p><strong>Candidate:</strong> Alex Carter · DOB 14/03/2006 · 07700 900123 · alex@samsdfs.biz · Course: Digital Skills</p>",
+      "tasks": [
+        {
+          "id": "A1",
+          "label": "A1",
+          "marks": 5,
+          "brief": "Complete the enrolment form using the details given in the brief.",
+          "kind": "form",
+          "fields": [
+            { "name": "name", "label": "Full name", "type": "text", "help": "Use: Alex Carter" },
+            { "name": "dob", "label": "Date of birth", "type": "text", "placeholder": "DD/MM/YYYY", "help": "Use: 14/03/2006" },
+            { "name": "phone", "label": "Phone", "type": "tel", "help": "Use: 07700 900123" },
+            { "name": "email", "label": "Email", "type": "email", "help": "Use: alex@samsdfs.biz" },
+            { "name": "course", "label": "Course", "type": "select", "options": ["", "Digital Skills", "English", "Maths", "Business"] },
+            { "name": "agree", "label": "Terms and privacy notice", "type": "checkbox-group", "options": ["I agree"] }
+          ],
+          "criteria": [
+            { "test": "formFieldEquals", "field": "name", "value": "Alex Carter", "marks": 1 },
+            { "test": "formFieldEquals", "field": "phone", "value": "07700 900123", "marks": 1 },
+            { "test": "formFieldEquals", "field": "email", "value": "alex@samsdfs.biz", "marks": 1 },
+            { "test": "formFieldEquals", "field": "course", "value": "Digital Skills", "marks": 1 },
+            { "test": "formFieldCheckboxIncludes", "field": "agree", "values": ["I agree"], "marks": 1 }
+          ]
+        },
+        {
+          "id": "A2",
+          "label": "A2",
+          "marks": 1,
+          "brief": "Take a screenshot of the completed enrolment form.",
+          "kind": "screenshot",
+          "prompt": "Upload a screenshot of the finished form.",
+          "criteria": [
+            { "test": "hasScreenshots", "min": 1, "marks": 1 }
+          ]
+        },
+        {
+          "id": "A3",
+          "label": "A3",
+          "marks": 4,
+          "brief": "Email the admissions team (admissions@samsdfs.biz) confirming you have enrolled. Use a clear subject and a polite greeting and close.",
+          "kind": "email",
+          "contacts": [{ "name": "Admissions", "email": "admissions@samsdfs.biz" }],
+          "criteria": [
+            { "test": "emailHasField", "field": "to", "contains": ["admissions@samsdfs.biz"], "marks": 1 },
+            { "test": "emailHasField", "field": "subject", "regex": "(enrol|enrolment|application|course)", "marks": 1 },
+            { "test": "emailHasField", "field": "body", "regex": "(dear|hi|hello)", "marks": 1 },
+            { "test": "emailWasSent", "marks": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e3-volunteering",
+      "title": "Volunteering at the food bank",
+      "scenario": "You want to volunteer at a local food bank. Research the role, fill in a short note and email the coordinator.",
+      "briefHtml": "<p>Please:</p><ul><li>Search online for what volunteers at a food bank typically do.</li><li>Take a screenshot of the page you used.</li><li>Write a short note about why you want to volunteer.</li><li>Email volunteer@samsdfs.biz to express your interest.</li></ul>",
+      "tasks": [
+        {
+          "id": "A1",
+          "label": "A1",
+          "marks": 1,
+          "brief": "Search online for food bank volunteer roles.",
+          "kind": "search",
+          "prompt": "Enter search terms.",
+          "criteria": [
+            { "test": "searchHasTerm", "text": "food bank", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A2",
+          "label": "A2",
+          "marks": 1,
+          "brief": "Take a screenshot of the search results.",
+          "kind": "screenshot",
+          "prompt": "Upload a screenshot of the results page.",
+          "criteria": [
+            { "test": "hasScreenshots", "min": 1, "marks": 1 }
+          ]
+        },
+        {
+          "id": "B1",
+          "label": "B1",
+          "marks": 3,
+          "brief": "Write a short note (3–5 sentences) saying why you want to volunteer. Use the bold or italic buttons to make the most important sentence stand out.",
+          "kind": "document",
+          "initialHtml": "<h2>Why I want to volunteer</h2><p></p>",
+          "criteria": [
+            { "test": "docMatchesRegex", "regex": ".{120,}", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "(volunteer|help|community)", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "<(b|strong|i|em)>|font-weight", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A3",
+          "label": "A3",
+          "marks": 4,
+          "brief": "Email volunteer@samsdfs.biz to ask about volunteering. Include subject, greeting, a short message and a polite close.",
+          "kind": "email",
+          "contacts": [{ "name": "Volunteer coordinator", "email": "volunteer@samsdfs.biz" }],
+          "criteria": [
+            { "test": "emailHasField", "field": "to", "contains": ["volunteer@samsdfs.biz"], "marks": 1 },
+            { "test": "emailHasField", "field": "subject", "regex": "(volunteer|food bank|help)", "marks": 1 },
+            { "test": "emailHasField", "field": "body", "regex": "(dear|hi|hello)", "marks": 1 },
+            { "test": "emailWasSent", "marks": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e3-book-cinema",
+      "title": "Book a cinema ticket",
+      "scenario": "You want to book a cinema ticket online and tell a friend about the film.",
+      "briefHtml": "<p>Please:</p><ul><li>Search for showings of a film at a local cinema.</li><li>Fill the booking form below with your details.</li><li>Email a friend to invite them.</li></ul>",
+      "tasks": [
+        {
+          "id": "A1",
+          "label": "A1",
+          "marks": 1,
+          "brief": "Search online for cinema showings of any film of your choice.",
+          "kind": "search",
+          "prompt": "Enter search terms.",
+          "criteria": [
+            { "test": "searchHasTerm", "text": "cinema", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A2",
+          "label": "A2",
+          "marks": 4,
+          "brief": "Complete the booking form.",
+          "kind": "form",
+          "fields": [
+            { "name": "film", "label": "Film title", "type": "text" },
+            { "name": "date", "label": "Date", "type": "text", "placeholder": "DD/MM/YYYY" },
+            { "name": "seats", "label": "Number of seats", "type": "text" },
+            { "name": "email", "label": "Email for booking confirmation", "type": "email" }
+          ],
+          "criteria": [
+            { "test": "emailHasField", "field": "film", "regex": ".{2,}", "marks": 1 },
+            { "test": "emailHasField", "field": "date", "regex": "\\d{1,2}[/-]\\d{1,2}", "marks": 1 },
+            { "test": "emailHasField", "field": "seats", "regex": "^\\d+$", "marks": 1 },
+            { "test": "emailHasField", "field": "email", "regex": "@", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A3",
+          "label": "A3",
+          "marks": 3,
+          "brief": "Email a friend (friend@samsdfs.biz) to invite them. Subject, greeting and close required.",
+          "kind": "email",
+          "criteria": [
+            { "test": "emailHasField", "field": "to", "regex": "@", "marks": 1 },
+            { "test": "emailHasField", "field": "subject", "regex": ".{3,}", "marks": 1 },
+            { "test": "emailWasSent", "marks": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e3-shopping-list",
+      "title": "Weekly shopping budget",
+      "scenario": "You want to plan a small weekly shopping list with prices and total cost.",
+      "briefHtml": "<p>Open the shopping spreadsheet. Fill in the prices for each item, add a Total column, calculate the total cost and tidy the layout.</p>",
+      "tasks": [
+        {
+          "id": "C1",
+          "label": "C1",
+          "marks": 4,
+          "brief": "Open the shopping list. Add a Total formula in column D for each item (price × quantity). Add a grand total at D8.",
+          "kind": "spreadsheet",
+          "rows": 10,
+          "cols": 5,
+          "initial": {
+            "cells": {
+              "A1": { "raw": "Weekly Shopping" },
+              "A3": { "raw": "Item" }, "B3": { "raw": "Price" }, "C3": { "raw": "Qty" }, "D3": { "raw": "Total" },
+              "A4": { "raw": "Bread" }, "B4": { "raw": "1.20" }, "C4": { "raw": "2" },
+              "A5": { "raw": "Milk" }, "B5": { "raw": "1.50" }, "C5": { "raw": "1" },
+              "A6": { "raw": "Apples" }, "B6": { "raw": "0.30" }, "C6": { "raw": "6" },
+              "A7": { "raw": "Cheese" }, "B7": { "raw": "3.50" }, "C7": { "raw": "1" },
+              "A8": { "raw": "Grand total" }
+            }
+          },
+          "criteria": [
+            { "test": "sheetCellRaw", "cell": "D4", "regex": "=B4\\*C4|=C4\\*B4", "marks": 1 },
+            { "test": "sheetCellRaw", "cell": "D8", "regex": "=SUM\\(D4:D7\\)", "marks": 1 },
+            { "test": "sheetCellFormatted", "cell": "B4", "numFmt": "currency", "marks": 1 },
+            { "test": "sheetCellFormatted", "cell": "D4", "numFmt": "currency", "marks": 1 }
+          ]
+        },
+        {
+          "id": "B1",
+          "label": "B1",
+          "marks": 2,
+          "brief": "Take a screenshot of your completed spreadsheet showing the totals.",
+          "kind": "screenshot",
+          "prompt": "Upload a screenshot of the spreadsheet.",
+          "criteria": [
+            { "test": "hasScreenshots", "min": 1, "marks": 2 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e3-bus-times",
+      "title": "Find your bus times",
+      "scenario": "You need to find the times of buses from your home to college on a Monday morning.",
+      "briefHtml": "<p>Use a search engine to find your route. Record the journey details and email them to a parent or carer.</p>",
+      "tasks": [
+        {
+          "id": "A1",
+          "label": "A1",
+          "marks": 1,
+          "brief": "Search online for bus times for a route of your choice.",
+          "kind": "search",
+          "prompt": "Enter search terms.",
+          "criteria": [
+            { "test": "searchHasTerm", "text": "bus", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A2",
+          "label": "A2",
+          "marks": 3,
+          "brief": "Record the journey details in the form below.",
+          "kind": "form",
+          "fields": [
+            { "name": "route", "label": "Bus number / route", "type": "text" },
+            { "name": "from", "label": "Stop / area you board", "type": "text" },
+            { "name": "time", "label": "Time you would catch the bus", "type": "text", "placeholder": "HH:MM" }
+          ],
+          "criteria": [
+            { "test": "emailHasField", "field": "route", "regex": ".{1,}", "marks": 1 },
+            { "test": "emailHasField", "field": "from", "regex": ".{2,}", "marks": 1 },
+            { "test": "emailHasField", "field": "time", "regex": "\\d{1,2}:\\d{2}", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A3",
+          "label": "A3",
+          "marks": 3,
+          "brief": "Email parent@samsdfs.biz with the bus details.",
+          "kind": "email",
+          "criteria": [
+            { "test": "emailHasField", "field": "to", "contains": ["parent@samsdfs.biz"], "marks": 1 },
+            { "test": "emailHasField", "field": "body", "regex": "(bus|route|time|catch)", "marks": 1 },
+            { "test": "emailWasSent", "marks": 1 }
+          ]
+        }
+      ]
+    }
+  ]
+}

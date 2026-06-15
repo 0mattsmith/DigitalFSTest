@@ -1,6 +1,6 @@
 {
   "name": "dfsq-practice",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": true,
   "description": "Practice exam application for Pearson Digital Functional Skills (Entry Level 3 and Level 1)",
   "main": "src/main/main.js",
@@ -13,7 +13,8 @@
     "build:all": "electron-builder -mw",
     "release:win": "electron-builder --win --x64 --publish always",
     "release:mac": "electron-builder --mac --x64 --arm64 --publish always",
-    "release:all": "electron-builder -mw --publish always"
+    "release:all": "electron-builder -mw --publish always",
+    "build:web": "node build-web.js"
   },
   "dependencies": {
     "electron-updater": "^6.3.9"
@@ -31,6 +32,7 @@
     "files": [
       "src/**/*",
       "assets/**/*",
+      "build/icon.*",
       "package.json",
       "!**/.DS_Store",
       "!**/Thumbs.db"
@@ -44,6 +46,7 @@
       }
     ],
     "win": {
+      "icon": "build/icon.ico",
       "target": [
         { "target": "nsis", "arch": ["x64"] },
         { "target": "portable", "arch": ["x64"] }
@@ -57,12 +60,16 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "DFSQ Practice"
+      "shortcutName": "DFSQ Practice",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico"
     },
     "portable": {
       "artifactName": "DFSQ-Practice-${version}-portable.exe"
     },
     "mac": {
+      "icon": "build/icon.png",
       "category": "public.app-category.education",
       "target": [
         { "target": "dmg", "arch": ["x64", "arm64"] }

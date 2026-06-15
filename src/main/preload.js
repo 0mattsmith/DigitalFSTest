@@ -2,6 +2,9 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('dfsq', {
+  // Sync values for the renderer to use without a round-trip.
+  platform: process.platform,   // 'darwin' | 'win32' | 'linux'
+
   loadBank: (level) => ipcRenderer.invoke('banks:load', level),
   loadScenarios: (level) => ipcRenderer.invoke('scenarios:load', level),
   listHistory: () => ipcRenderer.invoke('history:list'),
@@ -10,6 +13,7 @@ contextBridge.exposeInMainWorld('dfsq', {
   listAttemptFiles: (attemptId) => ipcRenderer.invoke('attempt:listFiles', attemptId),
   openAttemptFolder: (attemptId) => ipcRenderer.invoke('attempt:openFolder', attemptId),
   openExternalFile: (fullPath) => ipcRenderer.invoke('shell:openExternalFile', fullPath),
+  openUrl: (url) => ipcRenderer.invoke('shell:openUrl', url),
   exportToDownloads: (payload) => ipcRenderer.invoke('shell:exportToDownloads', payload),
   captureWindow: (opts) => ipcRenderer.invoke('screenshot:captureWindow', opts || {}),
   meta: () => ipcRenderer.invoke('app:meta'),

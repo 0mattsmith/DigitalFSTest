@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; script-src 'self'; font-src 'self'" />
+  <meta name="viewport" content="width=1180" />
   <title>DFSQ Practice</title>
+  <meta name="description" content="Practice exam application for Pearson Digital Functional Skills (Entry Level 3 and Level 1). Runs entirely in your browser — no install, no sign-up. All work saved locally." />
+  <link rel="icon" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
   <link rel="stylesheet" href="styles/main.css" />
 </head>
 <body>
   <div id="player" class="player">
     <div class="player-titlebar" id="player-titlebar">
-      <!-- macOS-style traffic light controls (visible only on macOS) -->
+      <!-- macOS-style traffic light controls (hidden on web — browser handles window) -->
       <div class="tb-dots" id="tb-dots" aria-hidden="true">
         <button class="tb-dot tb-dot-r" id="tb-dot-close"    title="Close"    aria-label="Close window"></button>
         <button class="tb-dot tb-dot-y" id="tb-dot-minimize" title="Minimise" aria-label="Minimise window"></button>
@@ -17,13 +20,13 @@
       </div>
       <span class="tb-title">Test Player Preview</span>
       <span class="tb-spacer"></span>
-      <button id="tb-screenshot" class="tb-screenshot" title="Take a screenshot of this window (Cmd/Ctrl+Shift+S)" aria-label="Screenshot">
+      <button id="tb-screenshot" class="tb-screenshot" title="Take a screenshot of this page (Cmd/Ctrl+Shift+S)" aria-label="Screenshot">
         <svg class="tb-cam-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
           <path fill="currentColor" d="M9 3l-2 2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3l-2-2H9zm3 5a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
         </svg>
         <span class="tb-cam-label">Screenshot</span>
       </button>
-      <!-- Windows / Linux style controls (visible on those platforms) -->
+      <!-- Windows / Linux style controls (hidden on web — browser handles window) -->
       <div class="tb-ctls" id="tb-ctls">
         <button class="tb-ctl tb-min"   title="Minimise" aria-label="Minimise window">&minus;</button>
         <button class="tb-ctl tb-max"   title="Maximise" aria-label="Toggle maximise">&#9633;</button>
@@ -53,6 +56,15 @@
     </div>
   </div>
 
+  <!-- html2canvas powers the in-app screenshot button. Loaded async so it
+       doesn't block the rest of the app. Capture button waits until ready. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+          crossorigin="anonymous" defer></script>
+
+  <!-- Polyfill window.dfsq for the browser. MUST run before app.js. -->
+  <script src="web-bridge.js"></script>
+
+  <!-- Reuse the same renderer module the Electron app uses. -->
   <script type="module" src="app.js"></script>
 </body>
 </html>

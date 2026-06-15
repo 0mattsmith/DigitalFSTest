@@ -1,0 +1,549 @@
+{
+  "level": "l1",
+  "scenarios": [
+    {
+      "id": "l1-sandwich-shop",
+      "title": "Sandwich shop owner",
+      "scenario": "You are working at a sandwich shop. The owner has asked you to update the sales spreadsheet and the customer flyer.",
+      "briefHtml": "<p><strong>From:</strong> sam@pearson.com<br><strong>Subject:</strong> Sandwich shop updates</p><p>Please update SANDWICH SALES to show totals, income and a chart. Also update the SANDWICH FLYER to a landscape layout with a table of offers and an image.</p>",
+      "tasks": [
+        {
+          "id": "A1",
+          "label": "A1",
+          "marks": 1,
+          "brief": "Search online for the postal address of the Food Standards Agency in London.",
+          "kind": "search",
+          "prompt": "Use search terms and record the address you found.",
+          "criteria": [
+            { "test": "searchHasTerm", "text": "food standards", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A2",
+          "label": "A2",
+          "marks": 1,
+          "brief": "Set up an automated signature in your email composer that includes 'Kind regards' and your name.",
+          "kind": "email",
+          "criteria": [
+            { "test": "emailHasSignature", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A3",
+          "label": "A3",
+          "marks": 4,
+          "brief": "Send an email to sam@pearson.com with the postal address of the Food Standards Agency. Include a subject line, greeting and close, and the address in the message.",
+          "kind": "email",
+          "contacts": [{ "name": "Sam", "email": "sam@pearson.com" }],
+          "criteria": [
+            { "test": "emailHasField", "field": "to", "contains": ["sam@pearson.com"], "marks": 1 },
+            { "test": "emailHasField", "field": "subject", "regex": "(food|fsa|standards|address)", "marks": 1 },
+            { "test": "emailHasField", "field": "body", "regex": "(dear|hello|hi)", "marks": 1 },
+            { "test": "emailWasSent", "marks": 1 }
+          ]
+        },
+        {
+          "id": "B1",
+          "label": "B1",
+          "marks": 4,
+          "brief": "Open the flyer. Set it to landscape, add the list of special offers next to or below 'Special offers this month', and format it as a table.",
+          "kind": "document",
+          "initialLandscape": false,
+          "initialHtml": "<h1 style='color:#003057'>Sam's Sandwich Shop</h1><p><strong>Special offers this month:</strong></p><p style='color:#888'>(insert list of special offers as a table below this line)</p><p>Visit us at 12 High Street.</p>",
+          "criteria": [
+            { "test": "docIsLandscape", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "<table", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "(meal deal|2 for 1|buy.*get|£\\d|free)", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "<img|sandwich", "marks": 1 }
+          ]
+        },
+        {
+          "id": "B2",
+          "label": "B2",
+          "marks": 3,
+          "brief": "Format the heading text (change the colour), add a page border, and make sure the flyer fits the page without images overlapping text.",
+          "kind": "document",
+          "initialHtml": "<h1>Sam's Sandwich Shop</h1><p>Body content here.</p>",
+          "criteria": [
+            { "test": "docMatchesRegex", "regex": "color:.{0,12}#|color: ?red|color: ?blue", "marks": 1 },
+            { "test": "docHasBorder", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": ".{50,}", "marks": 1 }
+          ]
+        },
+        {
+          "id": "C1",
+          "label": "C1",
+          "marks": 4,
+          "brief": "Open SANDWICH SALES. Merge cells A1:H1 with the title 'Sandwich Sales' centred, font size 24, and shade with a light green colour. Add formulae for Total sold and Income in columns G and H, including an Average row.",
+          "kind": "spreadsheet",
+          "rows": 14,
+          "cols": 8,
+          "initial": {
+            "cells": {
+              "A1": { "raw": "Sandwich Sales" },
+              "A3": { "raw": "Sandwich" }, "B3": { "raw": "Price" },
+              "C3": { "raw": "Wk1" }, "D3": { "raw": "Wk2" }, "E3": { "raw": "Wk3" }, "F3": { "raw": "Wk4" },
+              "G3": { "raw": "Total sold" }, "H3": { "raw": "Income" },
+              "A4": { "raw": "Chicken" }, "B4": { "raw": "4.50" }, "C4": { "raw": "20" }, "D4": { "raw": "25" }, "E4": { "raw": "18" }, "F4": { "raw": "22" },
+              "A5": { "raw": "Tuna" }, "B5": { "raw": "3.95" }, "C5": { "raw": "15" }, "D5": { "raw": "18" }, "E5": { "raw": "12" }, "F5": { "raw": "20" },
+              "A6": { "raw": "Cheese" }, "B6": { "raw": "3.25" }, "C6": { "raw": "30" }, "D6": { "raw": "28" }, "E6": { "raw": "33" }, "F6": { "raw": "31" },
+              "A7": { "raw": "Ham" }, "B7": { "raw": "4.10" }, "C7": { "raw": "22" }, "D7": { "raw": "24" }, "E7": { "raw": "20" }, "F7": { "raw": "26" },
+              "A8": { "raw": "BLT" }, "B8": { "raw": "4.75" }, "C8": { "raw": "18" }, "D8": { "raw": "22" }, "E8": { "raw": "19" }, "F8": { "raw": "21" },
+              "A9": { "raw": "Egg" }, "B9": { "raw": "3.10" }, "C9": { "raw": "12" }, "D9": { "raw": "15" }, "E9": { "raw": "14" }, "F9": { "raw": "16" },
+              "A10": { "raw": "Falafel" }, "B10": { "raw": "4.25" }, "C10": { "raw": "10" }, "D10": { "raw": "14" }, "E10": { "raw": "12" }, "F10": { "raw": "13" },
+              "A11": { "raw": "Feta cheese" }, "B11": { "raw": "3.65" }, "C11": { "raw": "8" }, "D11": { "raw": "11" }, "E11": { "raw": "9" }, "F11": { "raw": "10" },
+              "A12": { "raw": "Average" }
+            }
+          },
+          "externalFile": { "kind": "xlsx", "filename": "SANDWICH SALES" },
+          "criteria": [
+            { "test": "sheetHasMerge", "range": "A1:H1", "marks": 1 },
+            { "test": "sheetCellFormatted", "cell": "A1", "fontSize": 24, "marks": 1 },
+            { "test": "sheetCellFormatted", "cell": "A1", "bg": true, "marks": 1 },
+            { "test": "sheetCellRaw", "cell": "G4", "regex": "=SUM\\(C4:F4\\)|=C4\\+D4\\+E4\\+F4", "marks": 1 }
+          ]
+        },
+        {
+          "id": "C2",
+          "label": "C2",
+          "marks": 4,
+          "brief": "Calculate the Average sold (row 12) for each week. Format the currency columns as £ with 2 decimal places. Sort A3:F11 in ascending order of Price.",
+          "kind": "spreadsheet",
+          "rows": 14,
+          "cols": 8,
+          "criteria": [
+            { "test": "sheetCellRaw", "cell": "C12", "regex": "=AVERAGE|=SUM\\(C4:C11\\)/8|=\\(.*\\)/8", "marks": 1 },
+            { "test": "sheetCellFormatted", "cell": "B4", "numFmt": "currency", "marks": 1 },
+            { "test": "sheetCellFormatted", "cell": "H4", "numFmt": "currency", "marks": 1 },
+            { "test": "sheetSorted", "range": "A3:F11", "direction": "asc", "marks": 1 }
+          ]
+        },
+        {
+          "id": "C3",
+          "label": "C3",
+          "marks": 4,
+          "brief": "Insert a chart (bar, column or pie — NOT a line graph). Labels: column A. Values: column G. Add a chart title and axis labels. Place the chart on a separate worksheet.",
+          "kind": "spreadsheet",
+          "rows": 14,
+          "cols": 8,
+          "criteria": [
+            { "test": "sheetHasChart", "marks": 1 },
+            { "test": "sheetChartType", "type": "bar", "marks": 1 },
+            { "test": "sheetChartOnNewSheet", "marks": 1 },
+            { "test": "sheetCellRaw", "cell": "G4", "regex": "=SUM", "marks": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "l1-utility-meter",
+      "title": "Utility meter reading",
+      "scenario": "You need to submit an electricity meter reading using an online portal.",
+      "briefHtml": "<p><strong>From:</strong> billing@samsdfs.biz</p><p>Please use the online form to submit your meter reading. Account: R753197 · Reading: 032075 · Postcode: NT25 3BG · Phone: 01632 960455 · Email: sam@pearson.com. Choose Email and Text as marketing preferences.</p>",
+      "tasks": [
+        {
+          "id": "D1",
+          "label": "D1",
+          "marks": 5,
+          "brief": "Complete the meter reading form with the details from the brief, select Electricity, enter the reading, upload an image as evidence and tick Email + Text marketing preferences.",
+          "kind": "form",
+          "fields": [
+            { "name": "account", "label": "Account number", "type": "text" },
+            { "name": "reading", "label": "Meter reading", "type": "text" },
+            { "name": "postcode", "label": "Postcode", "type": "text" },
+            { "name": "phone", "label": "Phone", "type": "tel" },
+            { "name": "email", "label": "Email", "type": "email" },
+            { "name": "fuel", "label": "Fuel type", "type": "select", "options": ["", "Electricity", "Gas"] },
+            { "name": "evidence", "label": "Upload meter photo", "type": "file" },
+            { "name": "marketing", "label": "Marketing preferences", "type": "checkbox-group", "options": ["Email", "Text", "Post", "Phone"] }
+          ],
+          "criteria": [
+            { "test": "formFieldEquals", "field": "account", "value": "R753197", "marks": 1 },
+            { "test": "formFieldEquals", "field": "reading", "value": "032075", "marks": 1 },
+            { "test": "formFieldEquals", "field": "fuel", "value": "Electricity", "marks": 1 },
+            { "test": "formFieldHasImage", "field": "evidence", "marks": 1 },
+            { "test": "formFieldCheckboxIncludes", "field": "marketing", "values": ["Email", "Text"], "marks": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "l1-printer-research",
+      "title": "Wireless printer problem",
+      "scenario": "You can't get your wireless printer to connect. Use online resources to find a solution and file the information.",
+      "briefHtml": "<p>Create a new folder called Devices. Inside it, create a subfolder called Printer. Save your research in a suitably named file.</p>",
+      "tasks": [
+        {
+          "id": "E1",
+          "label": "E1",
+          "marks": 2,
+          "brief": "Create the Devices folder and the Printer subfolder.",
+          "kind": "file-management",
+          "criteria": [
+            { "test": "fileManagementHasFolder", "name": "Devices", "marks": 1 },
+            { "test": "fileManagementHasSubfolder", "name": "Printer", "marks": 1 }
+          ]
+        },
+        {
+          "id": "E2",
+          "label": "E2",
+          "marks": 4,
+          "brief": "Search for a solution to a wireless printer connection problem. Record the search you used and the information you found. Note whether the source looks reliable and up to date.",
+          "kind": "search",
+          "prompt": "Enter search terms and record the finding.",
+          "criteria": [
+            { "test": "searchHasTerm", "text": "printer", "marks": 1 },
+            { "test": "searchHasFinding", "text": "wireless", "marks": 1 },
+            { "test": "searchHasFinding", "text": "wi-fi|wifi|connect", "marks": 1 },
+            { "test": "searchHasFinding", "text": ".{40,}", "marks": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "l1-online-account",
+      "title": "Manage your online account",
+      "scenario": "You want to update your details and preferences for an online shop.",
+      "briefHtml": "<p>Go to your account settings. Update your phone number. Set your marketing preferences to Email only. Change your password to a strong one.</p>",
+      "tasks": [
+        {
+          "id": "F1",
+          "label": "F1",
+          "marks": 4,
+          "brief": "Complete the account settings form below.",
+          "kind": "form",
+          "fields": [
+            { "name": "name", "label": "Full name", "type": "text" },
+            { "name": "phone", "label": "Phone", "type": "tel" },
+            { "name": "password", "label": "New password", "type": "password", "help": "Must include letters, numbers and a symbol." },
+            { "name": "marketing", "label": "Marketing preferences", "type": "checkbox-group", "options": ["Email", "Text", "Post", "Phone"] }
+          ],
+          "criteria": [
+            { "test": "emailHasField", "field": "name", "regex": ".{2,}", "marks": 1 },
+            { "test": "emailHasField", "field": "phone", "regex": "^[0-9 +()-]{8,}$", "marks": 1 },
+            { "test": "emailHasField", "field": "password", "regex": "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[^A-Za-z0-9]).{8,}$", "marks": 1 },
+            { "test": "formFieldCheckboxIncludes", "field": "marketing", "values": ["Email"], "marks": 1 }
+          ]
+        },
+        {
+          "id": "F2",
+          "label": "F2",
+          "marks": 2,
+          "brief": "Take a screenshot of the completed form showing your password is hidden with dots.",
+          "kind": "screenshot",
+          "prompt": "Upload a screenshot of the completed form.",
+          "criteria": [
+            { "test": "hasScreenshots", "min": 1, "marks": 2 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "l1-newsletter",
+      "title": "Community group newsletter",
+      "scenario": "You volunteer for a community group. Edit their newsletter and email it to members.",
+      "briefHtml": "<p>Open the newsletter. Add a heading in a clear colour. Insert a small image. Make the layout landscape. Add a page border. Then email it to members with a friendly subject and message.</p>",
+      "tasks": [
+        {
+          "id": "B1",
+          "label": "B1",
+          "marks": 5,
+          "brief": "Edit the newsletter as described in the brief.",
+          "kind": "document",
+          "initialLandscape": false,
+          "initialHtml": "<h1>Community News</h1><p>Welcome to this month's newsletter.</p><p>Insert image and special content here.</p>",
+          "images": [
+            { "id": "community", "src": "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='100'%3E%3Crect width='100%25' height='100%25' fill='%23f0801f'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' fill='white' font-size='18'%3ECommunity%3C/text%3E%3C/svg%3E" }
+          ],
+          "criteria": [
+            { "test": "docIsLandscape", "marks": 1 },
+            { "test": "docHasBorder", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "<img", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "color:", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": ".{120,}", "marks": 1 }
+          ]
+        },
+        {
+          "id": "B2",
+          "label": "B2",
+          "marks": 4,
+          "brief": "Email the finished newsletter to members@samsdfs.biz with a friendly subject and greeting, and attach the newsletter (use the Attach file button after editing the document).",
+          "kind": "email",
+          "suggestedAttachments": [
+            { "fromTaskId": "B1", "filename": "Community_News.html", "kind": "document" }
+          ],
+          "criteria": [
+            { "test": "emailHasField", "field": "to", "contains": ["members@samsdfs.biz"], "marks": 1 },
+            { "test": "emailHasField", "field": "subject", "regex": "(newsletter|community|news)", "marks": 1 },
+            { "test": "emailHasAttachment", "any": true, "marks": 1 },
+            { "test": "emailWasSent", "marks": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "l1-fitness-tracker",
+      "title": "Fitness tracker comparison",
+      "scenario": "You want to buy a fitness tracker and need to choose between two brands.",
+      "briefHtml": "<p>Research two fitness trackers, compare them in a spreadsheet (price, battery life, features), then send your recommendation by email.</p>",
+      "tasks": [
+        {
+          "id": "C1",
+          "label": "C1",
+          "marks": 4,
+          "brief": "Complete the comparison spreadsheet. Use a formula to calculate the difference in price.",
+          "kind": "spreadsheet",
+          "rows": 10,
+          "cols": 5,
+          "initial": {
+            "cells": {
+              "A1": { "raw": "Fitness Tracker Comparison" },
+              "A3": { "raw": "Feature" }, "B3": { "raw": "Tracker A" }, "C3": { "raw": "Tracker B" }, "D3": { "raw": "Difference" },
+              "A4": { "raw": "Price (£)" },
+              "A5": { "raw": "Battery life (days)" },
+              "A6": { "raw": "Has heart rate" }
+            }
+          },
+          "criteria": [
+            { "test": "sheetCellRaw", "cell": "B4", "regex": "\\d", "marks": 1 },
+            { "test": "sheetCellRaw", "cell": "C4", "regex": "\\d", "marks": 1 },
+            { "test": "sheetCellRaw", "cell": "D4", "regex": "=B4-C4|=C4-B4|=ABS", "marks": 1 },
+            { "test": "sheetCellFormatted", "cell": "B4", "numFmt": "currency", "marks": 1 }
+          ]
+        },
+        {
+          "id": "C2",
+          "label": "C2",
+          "marks": 3,
+          "brief": "Email your recommendation to friend@samsdfs.biz with a clear subject and a greeting. Include which tracker you would buy and why.",
+          "kind": "email",
+          "criteria": [
+            { "test": "emailHasField", "field": "to", "contains": ["friend@samsdfs.biz"], "marks": 1 },
+            { "test": "emailHasField", "field": "body", "regex": "(because|reason|since|so that)", "marks": 1 },
+            { "test": "emailWasSent", "marks": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "l1-charity-report",
+      "title": "Charity event report",
+      "scenario": "You volunteered at a charity bake sale and need to write a one-page report and circulate it to the committee.",
+      "briefHtml": "<p>Create a one-page report including a heading in a clear colour, a table of items and totals, a small image, and a page border. Email the finished report to committee@samsdfs.biz with a clear subject.</p>",
+      "tasks": [
+        {
+          "id": "C1",
+          "label": "C1",
+          "marks": 4,
+          "brief": "Open the sales spreadsheet. Calculate the total income for each item (price × sold), then a grand total in cell D9. Format currency to 2 decimal places.",
+          "kind": "spreadsheet",
+          "rows": 12,
+          "cols": 6,
+          "initial": {
+            "cells": {
+              "A1": { "raw": "Bake sale takings" },
+              "A3": { "raw": "Item" }, "B3": { "raw": "Price" }, "C3": { "raw": "Sold" }, "D3": { "raw": "Income" },
+              "A4": { "raw": "Brownies" }, "B4": { "raw": "1.50" }, "C4": { "raw": "24" },
+              "A5": { "raw": "Cupcakes" }, "B5": { "raw": "2.00" }, "C5": { "raw": "30" },
+              "A6": { "raw": "Flapjacks" }, "B6": { "raw": "1.25" }, "C6": { "raw": "18" },
+              "A7": { "raw": "Lemon drizzle" }, "B7": { "raw": "2.50" }, "C7": { "raw": "12" },
+              "A8": { "raw": "Cookies" }, "B8": { "raw": "1.00" }, "C8": { "raw": "40" },
+              "A9": { "raw": "Grand total" }
+            }
+          },
+          "criteria": [
+            { "test": "sheetCellRaw", "cell": "D4", "regex": "=B4\\*C4|=C4\\*B4", "marks": 1 },
+            { "test": "sheetCellRaw", "cell": "D9", "regex": "=SUM\\(D4:D8\\)", "marks": 1 },
+            { "test": "sheetCellFormatted", "cell": "B4", "numFmt": "currency", "marks": 1 },
+            { "test": "sheetCellFormatted", "cell": "D9", "numFmt": "currency", "marks": 1 }
+          ]
+        },
+        {
+          "id": "B1",
+          "label": "B1",
+          "marks": 4,
+          "brief": "Edit the one-page report. Add a coloured heading, paste the totals into the document, add a page border and a small image.",
+          "kind": "document",
+          "initialLandscape": false,
+          "initialHtml": "<h1>Bake Sale Report</h1><p>Insert overview here. State the grand total raised and any highlights.</p>",
+          "images": [
+            { "id": "cake", "src": "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='100'%3E%3Crect width='100%25' height='100%25' fill='%23f9c2d4'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' fill='%23a23a6c' font-size='22'%3EBake Sale%3C/text%3E%3C/svg%3E" }
+          ],
+          "criteria": [
+            { "test": "docMatchesRegex", "regex": "color:.{0,12}#|color: ?red|color: ?blue", "marks": 1 },
+            { "test": "docHasBorder", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "<img", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "(raised|total|£\\d|\\d+\\.\\d{2})", "marks": 1 }
+          ]
+        },
+        {
+          "id": "B2",
+          "label": "B2",
+          "marks": 4,
+          "brief": "Email the report to committee@samsdfs.biz. Attach the document, write a clear subject and a polite message.",
+          "kind": "email",
+          "suggestedAttachments": [
+            { "fromTaskId": "B1", "filename": "Bake_Sale_Report.html", "kind": "document" }
+          ],
+          "criteria": [
+            { "test": "emailHasField", "field": "to", "contains": ["committee@samsdfs.biz"], "marks": 1 },
+            { "test": "emailHasField", "field": "subject", "regex": "(bake|sale|report|charity)", "marks": 1 },
+            { "test": "emailHasAttachment", "any": true, "marks": 1 },
+            { "test": "emailWasSent", "marks": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "l1-cafe-rota",
+      "title": "Café staff rota",
+      "scenario": "You're a supervisor at a café. Build the staff rota for the week and email it to the manager.",
+      "briefHtml": "<p>Open the rota. Add hours for each member of staff, calculate a Total per person and a Total per day. Format the title and sort by total hours descending. Email the rota to manager@samsdfs.biz with the file attached.</p>",
+      "tasks": [
+        {
+          "id": "C1",
+          "label": "C1",
+          "marks": 5,
+          "brief": "Complete the rota. Add total hours for each person (column H, =SUM of Mon..Sat) and column totals (row 11).",
+          "kind": "spreadsheet",
+          "rows": 12,
+          "cols": 9,
+          "initial": {
+            "cells": {
+              "A1": { "raw": "Café staff rota" },
+              "A3": { "raw": "Name" },
+              "B3": { "raw": "Mon" }, "C3": { "raw": "Tue" }, "D3": { "raw": "Wed" }, "E3": { "raw": "Thu" }, "F3": { "raw": "Fri" }, "G3": { "raw": "Sat" }, "H3": { "raw": "Total" },
+              "A4": { "raw": "Priya" }, "B4": { "raw": "6" }, "C4": { "raw": "0" }, "D4": { "raw": "8" }, "E4": { "raw": "4" }, "F4": { "raw": "8" }, "G4": { "raw": "5" },
+              "A5": { "raw": "Mo" }, "B5": { "raw": "4" }, "C5": { "raw": "6" }, "D5": { "raw": "0" }, "E5": { "raw": "8" }, "F5": { "raw": "8" }, "G5": { "raw": "0" },
+              "A6": { "raw": "Jordan" }, "B6": { "raw": "8" }, "C6": { "raw": "8" }, "D6": { "raw": "4" }, "E6": { "raw": "0" }, "F6": { "raw": "0" }, "G6": { "raw": "6" },
+              "A7": { "raw": "Sara" }, "B7": { "raw": "0" }, "C7": { "raw": "4" }, "D7": { "raw": "8" }, "E7": { "raw": "6" }, "F7": { "raw": "4" }, "G7": { "raw": "8" },
+              "A8": { "raw": "Ben" }, "B8": { "raw": "8" }, "C8": { "raw": "6" }, "D8": { "raw": "8" }, "E8": { "raw": "8" }, "F8": { "raw": "6" }, "G8": { "raw": "0" },
+              "A11": { "raw": "Daily total" }
+            }
+          },
+          "criteria": [
+            { "test": "sheetHasMerge", "range": "A1:H1", "marks": 1 },
+            { "test": "sheetCellRaw", "cell": "H4", "regex": "=SUM\\(B4:G4\\)", "marks": 1 },
+            { "test": "sheetCellRaw", "cell": "B11", "regex": "=SUM\\(B4:B8\\)", "marks": 1 },
+            { "test": "sheetSorted", "range": "A3:H8", "direction": "desc", "marks": 1 },
+            { "test": "sheetCellFormatted", "cell": "A1", "fontSize": 24, "marks": 1 }
+          ]
+        },
+        {
+          "id": "C2",
+          "label": "C2",
+          "marks": 3,
+          "brief": "Email manager@samsdfs.biz with the rota attached. Use a sensible subject. Mention the highest-hours staff member in the body.",
+          "kind": "email",
+          "suggestedAttachments": [
+            { "fromTaskId": "C1", "filename": "Cafe_Rota.csv", "kind": "spreadsheet" }
+          ],
+          "criteria": [
+            { "test": "emailHasField", "field": "to", "contains": ["manager@samsdfs.biz"], "marks": 1 },
+            { "test": "emailHasField", "field": "subject", "regex": "(rota|staff|schedule|week)", "marks": 1 },
+            { "test": "emailHasAttachment", "any": true, "marks": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "l1-cloud-storage",
+      "title": "Cloud storage for the team",
+      "scenario": "Your team needs to share project files in the cloud. Plan the folder structure, write a short procedure for new starters, and email it round.",
+      "briefHtml": "<p>Create a sensible cloud folder structure for the team project (e.g. Project/Year/Topic). Write a short Word-style guide explaining how new starters should organise their files. Email the guide to team@samsdfs.biz.</p>",
+      "tasks": [
+        {
+          "id": "E1",
+          "label": "E1",
+          "marks": 3,
+          "brief": "Create the folder structure in the file management area: a top-level Project folder, with two subfolders (e.g. 'Reports' and 'Photos').",
+          "kind": "file-management",
+          "criteria": [
+            { "test": "fileManagementHasFolder", "name": "Project", "marks": 1 },
+            { "test": "fileManagementHasSubfolder", "name": "Reports", "marks": 1 },
+            { "test": "fileManagementHasSubfolder", "name": "Photos", "marks": 1 }
+          ]
+        },
+        {
+          "id": "B1",
+          "label": "B1",
+          "marks": 4,
+          "brief": "Write a short procedure (at least 4 sentences) explaining how new team members should name their files and where to put them. Use a heading, a bullet list and bold for key terms.",
+          "kind": "document",
+          "initialHtml": "<h1>Cloud file procedure</h1><p>Insert your procedure here.</p>",
+          "criteria": [
+            { "test": "docMatchesRegex", "regex": ".{200,}", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "<(ul|ol)>", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "<(b|strong)>|font-weight", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "(file name|naming|folder|backup|version)", "marks": 1 }
+          ]
+        },
+        {
+          "id": "B2",
+          "label": "B2",
+          "marks": 3,
+          "brief": "Email the procedure to team@samsdfs.biz with a friendly subject and a polite close.",
+          "kind": "email",
+          "suggestedAttachments": [
+            { "fromTaskId": "B1", "filename": "Cloud_Procedure.html", "kind": "document" }
+          ],
+          "criteria": [
+            { "test": "emailHasField", "field": "to", "contains": ["team@samsdfs.biz"], "marks": 1 },
+            { "test": "emailHasAttachment", "any": true, "marks": 1 },
+            { "test": "emailWasSent", "marks": 1 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "l1-phishing-investigation",
+      "title": "Suspicious email investigation",
+      "scenario": "Your manager forwards you a suspicious-looking email and asks you to advise whether it is genuine.",
+      "briefHtml": "<p><strong>Forwarded message:</strong> 'Dear Customer, your account has been suspended. Click here to verify your details: http://yourbank-secure-verify.xyz/login'</p><p>Research the signs of phishing, write a short note explaining what is suspicious, and email your manager (manager@samsdfs.biz) with your advice.</p>",
+      "tasks": [
+        {
+          "id": "A1",
+          "label": "A1",
+          "marks": 2,
+          "brief": "Search online for guidance on spotting phishing emails. Record at least two warning signs.",
+          "kind": "search",
+          "prompt": "Enter search terms and record what you found.",
+          "criteria": [
+            { "test": "searchHasTerm", "text": "phishing", "marks": 1 },
+            { "test": "searchHasFinding", "text": ".{60,}", "marks": 1 }
+          ]
+        },
+        {
+          "id": "B1",
+          "label": "B1",
+          "marks": 4,
+          "brief": "Write a short note (at least 5 sentences) listing the warning signs in the email and what your manager should do about it. Use a bullet list.",
+          "kind": "document",
+          "initialHtml": "<h2>Suspicious email — my advice</h2><p></p>",
+          "criteria": [
+            { "test": "docMatchesRegex", "regex": ".{250,}", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "<(ul|ol)>", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "(do not click|don't click|not legitimate|phishing|scam|suspicious|report)", "marks": 1 },
+            { "test": "docMatchesRegex", "regex": "(url|link|domain|address)", "marks": 1 }
+          ]
+        },
+        {
+          "id": "A2",
+          "label": "A2",
+          "marks": 4,
+          "brief": "Email manager@samsdfs.biz with your advice and attach the note. Sensible subject, greeting and close.",
+          "kind": "email",
+          "suggestedAttachments": [
+            { "fromTaskId": "B1", "filename": "Phishing_Advice.html", "kind": "document" }
+          ],
+          "criteria": [
+            { "test": "emailHasField", "field": "to", "contains": ["manager@samsdfs.biz"], "marks": 1 },
+            { "test": "emailHasField", "field": "subject", "regex": "(phishing|suspicious|scam|advice)", "marks": 1 },
+            { "test": "emailHasAttachment", "any": true, "marks": 1 },
+            { "test": "emailWasSent", "marks": 1 }
+          ]
+        }
+      ]
+    }
+  ]
+}

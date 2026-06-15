@@ -75,6 +75,59 @@ export ELECTRON_BUILDER_BINARIES_MIRROR=https://npmmirror.com/mirrors/electron-b
 npm run build:win-portable
 ```
 
+## Web version (GitHub Pages)
+
+The app can also run as a **pure browser app** with no install. Students just open a URL. All work is saved in the browser's local storage (per device, per browser).
+
+Deployed to: **https://0mattsmith.github.io/DigitalFSTest/**
+
+### How the web build works
+
+The browser version reuses every renderer file (`src/renderer/`), the same banks (`assets/`), and the same icon. The only Electron-specific surface — the `window.dfsq` IPC bridge — is polyfilled in the browser by `web/web-bridge.js`:
+
+- **Banks/scenarios** loaded via `fetch(...)` instead of Node `fs`
+- **History** stored in `localStorage` instead of a JSON file
+- **Per-attempt files** (document snapshots, screenshots, spreadsheet exports) stored in `IndexedDB`
+- **Screenshots** captured with `html2canvas` instead of Electron's `BrowserWindow.capturePage()`
+- **"Open in default app"** triggers a browser download
+- **Auto-updater + window controls** are no-ops (the browser handles its chrome, and the deployed page is always the latest version)
+
+The renderer doesn't need to know whether it's running in Electron or a browser — the bridge has the same shape either way.
+
+### Building and deploying the web version
+
+From the project root:
+
+```bash
+npm run build:web
+```
+
+That copies the renderer + assets + web shell into `./docs/`, ready to be served by GitHub Pages.
+
+To deploy:
+
+```bash
+npm run build:web
+git add docs
+git commit -m "Update web build"
+git push
+```
+
+Then, in GitHub once per repo:
+
+1. Go to **Settings → Pages**
+2. Under **Source** pick **Deploy from a branch**
+3. Branch: `main` · Folder: `/docs`
+4. Click **Save**
+
+GitHub will publish the site at `https://0mattsmith.github.io/DigitalFSTest/` within a minute. Every subsequent `git push` to `main` that includes `docs/` changes triggers a redeploy.
+
+### Web-version limitations vs. Electron
+
+- All saved files live in **the browser**. Clearing site data or using a different browser/computer means students lose their attempt history. (The Electron version writes to a real folder on the OS.)
+- Saved work can't be auto-opened in the user's Excel/Word — only downloaded from the browser. The marking rules don't care; the in-app editors still cover everything the marking criteria need.
+- `localStorage` has a per-origin quota of ~5 MB, but the bigger items (screenshots, document snapshots) go in `IndexedDB`, which typically allows 50+ MB. Plenty for normal use.
+
 ## Automatic updates (GitHub Releases)
 
 The app checks `https://github.com/0mattsmith/DigitalFSTest/releases` on every launch. If a newer version is published, a small "Update available" banner appears in the top-right corner of the window. Clicking Download fetches the new build in the background; clicking Restart afterwards installs it and relaunches.
