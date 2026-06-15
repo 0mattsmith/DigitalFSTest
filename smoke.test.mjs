@@ -172,6 +172,7 @@ const expected = [
   ['src/main/auto-updater.js', /module\.exports = \{ setup, isReady \}/],
   ['src/renderer/screens/work-on.js', /export async function showWorkOn/],
   ['src/renderer/screens/install-prompt.js', /export async function triggerInstall/],
+  ['src/renderer/screens/firebase-client.js', /export async function uploadAttempt/],
 ];
 for (const [rel, re] of expected) {
   const p = path.join(__dirname, rel);

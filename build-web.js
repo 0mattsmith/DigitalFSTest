@@ -69,6 +69,25 @@ fs.copyFileSync(path.join(ROOT, 'web', 'index.html'),    path.join(OUT, 'index.h
 fs.copyFileSync(path.join(ROOT, 'web', 'web-bridge.js'), path.join(OUT, 'web-bridge.js'));
 fs.copyFileSync(path.join(ROOT, 'web', 'manifest.json'), path.join(OUT, 'manifest.json'));
 
+// 4b) Firebase config (if the user has filled in firebase-config.js).
+// If they haven't, ship the template — that way the file exists so
+// onerror in the HTML doesn't fire, but FIREBASE_CONFIG.apiKey is empty
+// and the Firebase features stay disabled.
+const cfgPath = path.join(ROOT, 'web', 'firebase-config.js');
+const tplPath = path.join(ROOT, 'web', 'firebase-config.template.js');
+if (fs.existsSync(cfgPath)) {
+  fs.copyFileSync(cfgPath, path.join(OUT, 'firebase-config.js'));
+} else if (fs.existsSync(tplPath)) {
+  fs.copyFileSync(tplPath, path.join(OUT, 'firebase-config.js'));
+}
+
+// 4c) Teacher dashboard (separate static site at /teacher/)
+const teacherSrc = path.join(ROOT, 'web', 'teacher');
+const teacherDst = path.join(OUT, 'teacher');
+if (fs.existsSync(teacherSrc)) {
+  copyDir(teacherSrc, teacherDst);
+}
+
 // Stamp the service worker with a build version so that whenever we deploy,
 // every user's browser sees a fresh service worker, drops the old cache,
 // and re-precaches the new assets.

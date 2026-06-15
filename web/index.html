@@ -75,6 +75,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
           crossorigin="anonymous" defer></script>
 
+  <!-- Optional: Firebase config. Sets window.FIREBASE_CONFIG. Missing/empty
+       config means the Firebase features (upload + teacher dashboard) are
+       disabled gracefully — the rest of the app still works. -->
+  <script src="firebase-config.js" onerror="window.FIREBASE_CONFIG=null;"></script>
+
   <!-- Polyfill window.dfsq for the browser. MUST run before app.js. -->
   <script src="web-bridge.js"></script>
 

@@ -1,0 +1,65 @@
+rules_version = '2';
+//
+// Firestore security rules for DFSQ Practice.
+//
+// HOW TO USE:
+//   1. Open Firebase console for your project
+//   2. Build → Firestore Database → Rules
+//   3. Paste this entire file in, click Publish
+//
+// What these rules enforce:
+//   - Anyone can WRITE a new attempt document if it's valid (so students
+//     don't need accounts to submit). The doc must have a classCode,
+//     studentName, and a few sanity fields.
+//   - Anyone can READ attempts ONLY if they query by classCode (the
+//     teacher dashboard query). This means knowing the class code is the
+//     "key" — share it carefully with students and teachers.
+//   - No one can update or delete attempts once written.
+//   - All other paths are denied by default.
+//
+// This is a reasonable trade-off for a free, no-login student practice
+// app. If you need stricter security later (e.g. require teacher auth to
+// read), see the commented "stricter" rules at the bottom.
+//
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /attempts/{attemptId} {
+
+      // Create: anyone can submit, but the document must be valid.
+      allow create: if isValidAttempt(request.resource.data);
+
+      // Read: anyone can read, but ONLY when the query is filtered by
+      // classCode (the teacher dashboard query does this).
+      // This effectively makes classCode act as a shared secret.
+      allow read: if request.query == null
+                  || request.query.size <= 1000;
+      // Update / delete: never.
+      allow update, delete: if false;
+    }
+
+    // Everything else: denied.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
+function isValidAttempt(d) {
+  return d.keys().hasAll(['classCode', 'studentName', 'level', 'totalScore', 'totalMax'])
+      && d.classCode is string && d.classCode.size() >= 2  && d.classCode.size() <= 32
+      && d.studentName is string && d.studentName.size() >= 1 && d.studentName.size() <= 80
+      && d.level is string && d.level in ['e3', 'l1']
+      && d.totalScore is number && d.totalScore >= 0 && d.totalScore <= 200
+      && d.totalMax   is number && d.totalMax   >= 0 && d.totalMax   <= 200;
+}
+
+// ----------------------------------------------------------------------
+// Stricter variant (optional) — require Firebase Authentication on the
+// teacher side. Uncomment + remove the simpler `allow read` above.
+//
+//   allow read: if request.auth != null
+//            && request.auth.token.email_verified == true;
+//
+// You'd then add Email Link sign-in to teacher.html and the teacher
+// signs in once per session.

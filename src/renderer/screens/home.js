@@ -5,6 +5,7 @@ import { h, randomSeed, newAttemptId } from './components.js';
 import { renderA11yPanel } from './accessibility.js';
 import { manualCheck, getCurrentVersion } from './update-banner.js';
 import { canInstall, isStandalone, triggerInstall, manualInstallHint } from './install-prompt.js';
+import { isConfigured as firebaseConfigured, getStoredClassCode, setStoredClassCode } from './firebase-client.js';
 
 export function showHome(api, state) {
   const screen = document.getElementById('screen');
@@ -27,6 +28,12 @@ export function showHome(api, state) {
   const nameInput = h('input', { type: 'text', placeholder: 'Your name', value: candidateName });
   const regInput = h('input', { type: 'text', placeholder: 'Registration / Student ID (optional)' });
   const centreInput = h('input', { type: 'text', placeholder: 'Centre number (optional)' });
+  const classCodeInput = h('input', {
+    type: 'text', placeholder: 'Class code (optional)',
+    value: getStoredClassCode(),
+    style: { textTransform: 'uppercase', fontFamily: 'Menlo,monospace' },
+    onInput: (e) => { setStoredClassCode(e.target.value); },
+  });
   const seedField = h('input', { type: 'text', value: seedInput, style: { fontFamily: 'Menlo,monospace' } });
 
   const startBtn = h('button', { class: 'orange-btn', onClick: start }, 'Start practice test ▶');
@@ -136,6 +143,11 @@ export function showHome(api, state) {
       h('div', { class: 'field', style: { flex: '1' } },
         h('label', {}, 'Centre number'),
         centreInput)),
+    firebaseConfigured() ? h('div', { class: 'field' },
+      h('label', {}, 'Class code',
+        h('span', { class: 'muted', style: { fontWeight: 400, marginLeft: '6px' } },
+          'Enter the code your teacher gave you to upload results to the class dashboard.')),
+      classCodeInput) : null,
 
     h('h3', { class: 'section-h' }, 'Choose level'),
     h('div', { class: 'card-row' }, e3Card, l1Card),
@@ -172,34 +184,8 @@ export function showHome(api, state) {
     checkBtn);
   home.appendChild(footer);
 
-  // Install-as-app fallback row. The main install entry point now lives
-  // in the title bar (see app.js wireInstallButton). This card only shows
-  // up when the browser will *never* fire beforeinstallprompt — iOS
-  // Safari, Firefox desktop, and so on — because those students need a
-  // text explanation instead of a clickable button.
-  if ((window.dfsq && window.dfsq.platform === 'web') && !isStandalone()) {
-    const installRow = h('div', { class: 'home-install-row', id: 'home-install-row' });
-    home.appendChild(installRow);
-
-    function renderInstallRow() {
-      installRow.innerHTML = '';
-      if (canInstall() || isStandalone()) {
-        // Title-bar button is doing the job — leave this row empty.
-        return;
-      }
-      installRow.appendChild(h('details', { class: 'install-card' },
-        h('summary', {},
-          h('span', { class: 'install-icon' }, '⬇'),
-          h('strong', {}, 'Install to home screen / desktop'),
-          h('span', { class: 'muted', style: { marginLeft: '8px', fontSize: '12px' } }, '(click for instructions)')),
-        h('div', { class: 'install-hint' }, manualInstallHint())));
-    }
-    // Wait a tick before first render — beforeinstallprompt sometimes
-    // fires shortly after page load. If it arrives we'll hide the card.
-    setTimeout(renderInstallRow, 400);
-    window.addEventListener('dfsq:install-available', renderInstallRow);
-    window.addEventListener('dfsq:install-done',      renderInstallRow);
-  }
+  // The install entry point lives in the title bar — no install card on
+  // home anymore. See wireInstallButton() in app.js.
   getCurrentVersion().then((v) => {
     if (v) versionLabel.textContent = 'DFSQ Practice v' + v.version;
     else   versionLabel.textContent = 'DFSQ Practice (dev)';

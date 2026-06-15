@@ -10,7 +10,7 @@ import { showWorkOn } from './screens/work-on.js';
 import { captureWindow, showScreenshotModal, findCurrentScreenshotTask } from './screens/screenshot-tool.js';
 import { applyA11yToDocument } from './screens/accessibility.js';
 import { startUpdateListener } from './screens/update-banner.js';
-import { canInstall, isStandalone, triggerInstall } from './screens/install-prompt.js';
+import { canInstall, isStandalone, triggerInstall, manualInstallHint } from './screens/install-prompt.js';
 
 // Shared session state. Each test has its own state object that the
 // individual screens read from and write into. Routes own their UI; this
@@ -124,29 +124,63 @@ function wireInstallButton() {
   const btn = document.getElementById('tb-install');
   if (!btn) return;
   const isWeb = window.dfsq && window.dfsq.platform === 'web';
-  // In the Electron build the title bar is real, not a fallback — leave the
-  // install button hidden permanently.
-  if (!isWeb) { btn.classList.add('hide'); return; }
-  if (isStandalone()) { btn.classList.add('hide'); return; }
 
-  function refresh() {
-    if (canInstall() && !isStandalone()) btn.classList.remove('hide');
-    else btn.classList.add('hide');
+  // In the Electron build the OS already has its own copy installed, so
+  // hide the install button permanently. For the web build, the button
+  // is ALWAYS visible (unless the user is already running standalone),
+  // so they have a discoverable install entry point even in browsers
+  // like Brave where the native beforeinstallprompt is suppressed.
+  if (!isWeb || isStandalone()) {
+    btn.classList.add('hide');
+    return;
   }
-  refresh();
-  window.addEventListener('dfsq:install-available', refresh);
-  window.addEventListener('dfsq:install-done', refresh);
+  btn.classList.remove('hide');
+
+  // Hide once the user actually installs.
+  window.addEventListener('dfsq:install-done', () => btn.classList.add('hide'));
 
   btn.addEventListener('click', async () => {
     const outcome = await triggerInstall();
-    // After acceptance the button disappears automatically via the
-    // 'appinstalled' event we listen to in install-prompt.js.
-    if (outcome === 'not-available') {
-      // Shouldn't reach here because the button is hidden in this state,
-      // but be defensive in case the event was consumed elsewhere.
+    if (outcome === 'accepted') {
       btn.classList.add('hide');
+      return;
     }
+    if (outcome === 'not-available') {
+      // The browser hasn't fired beforeinstallprompt — show manual
+      // per-browser instructions in a small popover anchored to the button.
+      showInstallPopover();
+    }
+    // 'dismissed' is the user clicking Cancel on the native dialog — leave
+    // the button so they can try again.
   });
+}
+
+function showInstallPopover() {
+  const existing = document.getElementById('install-popover');
+  if (existing) { existing.remove(); return; }
+  const pop = document.createElement('div');
+  pop.id = 'install-popover';
+  pop.className = 'install-popover';
+  pop.innerHTML =
+    '<button class="install-popover-close" aria-label="Close">×</button>' +
+    '<h4>How to install on your browser</h4>' +
+    '<p>' + manualInstallHint() + '</p>' +
+    '<p style="opacity:0.75;font-size:11px;margin-top:8px">' +
+    'Once installed, the app launches in its own window and works offline.' +
+    '</p>';
+  document.body.appendChild(pop);
+  pop.querySelector('.install-popover-close').addEventListener('click', () => pop.remove());
+  // Auto-dismiss after 20 seconds in case the user just walks away.
+  setTimeout(() => { if (pop.isConnected) pop.remove(); }, 20000);
+  // Click outside closes
+  setTimeout(() => {
+    document.addEventListener('click', function onOutside(e) {
+      if (!pop.contains(e.target) && e.target.id !== 'tb-install') {
+        pop.remove();
+        document.removeEventListener('click', onOutside);
+      }
+    });
+  }, 0);
 }
 
 function applyPlatformClass() {

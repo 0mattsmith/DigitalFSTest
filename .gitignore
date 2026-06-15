@@ -31,3 +31,6 @@ npm-debug.log*
 .env.*
 *.pem
 *.key
+
+# Firebase credentials — local copy only (template file IS committed)
+web/firebase-config.js

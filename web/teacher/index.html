@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DFSQ Practice — Teacher Dashboard</title>
+  <meta name="description" content="Live leaderboard and analysis dashboard for the DFSQ Practice app. Enter a class code to see student attempts as they finish." />
+  <link rel="icon" href="../favicon.png" />
+  <link rel="stylesheet" href="teacher.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="brand-mark">f<i>(x)</i></span>
+      <div class="brand-text">
+        <strong>DFSQ Practice</strong>
+        <span>Teacher Dashboard</span>
+      </div>
+    </div>
+    <a class="back-link" href="../">↩ Open student app</a>
+  </header>
+
+  <main class="container">
+    <section class="class-picker" id="class-picker">
+      <h1>Class dashboard</h1>
+      <p class="muted">Enter the class code you've shared with your students. Their attempts will appear here in real time as they finish.</p>
+      <form id="class-form">
+        <input id="class-code-input" type="text" placeholder="e.g. YR11-DFSQ" autocomplete="off" />
+        <button class="primary" type="submit">Load class →</button>
+      </form>
+      <div id="class-error" class="error hide"></div>
+      <div id="firebase-warning" class="muted hide">
+        <strong>Heads up:</strong> Firebase isn't configured for this site.
+        Ask the maintainer to set up <code>firebase-config.js</code>.
+      </div>
+    </section>
+
+    <section class="dashboard hide" id="dashboard">
+      <header class="dashboard-head">
+        <div>
+          <h2 id="class-title">Class —</h2>
+          <p class="muted" id="class-stats">No attempts yet</p>
+        </div>
+        <div class="dashboard-actions">
+          <button id="change-class" class="ghost">Change class</button>
+          <button id="export-csv"  class="ghost">Export CSV</button>
+        </div>
+      </header>
+
+      <div class="grid">
+        <div class="panel">
+          <h3>Leaderboard</h3>
+          <p class="muted small">All attempts, most recent first. Sort by clicking a column.</p>
+          <div class="table-wrap">
+            <table id="leaderboard">
+              <thead>
+                <tr>
+                  <th data-sort="finishedAt">Finished ↓</th>
+                  <th data-sort="studentName">Student</th>
+                  <th data-sort="level">Level</th>
+                  <th data-sort="totalScore">Score</th>
+                  <th data-sort="pct">%</th>
+                  <th data-sort="grade">Grade</th>
+                  <th data-sort="mode">Mode</th>
+                  <th data-sort="seed">Seed</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Class-wide weak topics</h3>
+          <p class="muted small">Aggregated across every attempt in this class. Topics with the lowest accuracy first.</p>
+          <div id="weak-topics" class="weak-list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Firebase config + client live one folder up. -->
+  <script src="../firebase-config.js" onerror="window.FIREBASE_CONFIG=null;"></script>
+  <script type="module" src="teacher.js"></script>
+</body>
+</html>

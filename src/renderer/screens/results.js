@@ -5,6 +5,7 @@
 // in Finder/Explorer to see saved files.
 
 import { h } from './components.js';
+import { uploadAttempt, isConfigured as firebaseConfigured, getStoredClassCode } from './firebase-client.js';
 
 export async function showResults(api, state) {
   const screen = document.getElementById('screen');
@@ -45,6 +46,30 @@ export async function showResults(api, state) {
     encoding: 'utf8',
   });
 
+  // Upload to Firebase (if configured and a class code is set). Runs in
+  // the background — the page still renders straight away. We surface a
+  // small banner with the result once the upload completes or fails.
+  const classCode = getStoredClassCode();
+  let uploadStatus = null;
+  if (firebaseConfigured() && classCode) {
+    uploadStatus = 'pending';
+    uploadAttempt(state.attempt, classCode).then((res) => {
+      uploadStatus = res && res.ok ? 'ok' : (res && res.error ? 'error:' + res.error : 'skipped');
+      const el = document.getElementById('upload-status-pill');
+      if (!el) return;
+      if (uploadStatus === 'ok') {
+        el.textContent = '✓ Result sent to class ' + classCode;
+        el.className = 'pill ok';
+      } else if (uploadStatus.startsWith('error')) {
+        el.textContent = 'Could not upload to class ' + classCode + ' — ' + uploadStatus.slice(6);
+        el.className = 'pill bad';
+      } else {
+        el.textContent = 'Result saved locally only';
+        el.className = 'pill';
+      }
+    });
+  }
+
   // Section A breakdown
   const aBreakdown = (a.questions || []).map((q, i) => {
     const ans = a.answers?.[q.id];
@@ -73,7 +98,10 @@ export async function showResults(api, state) {
         h('span', { class: 'kbd' }, state.attempt.seed)),
       h('div', { class: 'muted', style: { marginTop: '2px' } },
         `Candidate: ${state.attempt.candidate}` +
-        (state.attempt.registration ? ` · Reg: ${state.attempt.registration}` : ''))),
+        (state.attempt.registration ? ` · Reg: ${state.attempt.registration}` : '')),
+      uploadStatus ? h('div', { style: { marginTop: '8px' } },
+        h('span', { id: 'upload-status-pill', class: 'pill' },
+          uploadStatus === 'pending' ? 'Uploading to class ' + classCode + '…' : '')) : null),
     h('h3', {}, 'Section A — Knowledge test'),
     h('p', { class: 'muted' }, `Score: ${a.score} / ${a.total}`),
     h('table', {}, ...aBreakdown),

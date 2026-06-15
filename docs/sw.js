@@ -14,7 +14,7 @@
 //   - On activation, old caches are deleted so the user's storage
 //     doesn't grow unbounded.
 
-const CACHE_VERSION = '2026-06-15T09-43-05-070Z';   // replaced by build-web.js
+const CACHE_VERSION = '2026-06-15T09-56-05-479Z';   // replaced by build-web.js
 const CACHE_NAME = 'dfsq-' + CACHE_VERSION;
 
 // Files we want available offline as soon as the SW installs.
@@ -42,6 +42,7 @@ const PRECACHE = [
   'screens/screenshot-tool.js',
   'screens/update-banner.js',
   'screens/install-prompt.js',
+  'screens/firebase-client.js',
   'editors/spreadsheet.js',
   'editors/docx-editor.js',
   'editors/email-editor.js',

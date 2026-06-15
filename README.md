@@ -75,6 +75,47 @@ export ELECTRON_BUILDER_BINARIES_MIRROR=https://npmmirror.com/mirrors/electron-b
 npm run build:win-portable
 ```
 
+## Class results + teacher dashboard (Firebase)
+
+The app can optionally upload each completed attempt to a shared Firestore database, so teachers can see a live class dashboard at **/teacher/** with a leaderboard and per-class weak topics.
+
+If Firebase isn't configured, everything keeps working — results just stay on each student's device.
+
+### One-time Firebase setup
+
+1. Go to **https://console.firebase.google.com/** → **Add project**. Free tier is plenty.
+2. Inside the project: **Build → Firestore Database → Create database → Start in production mode**. Pick a region close to you (e.g. `europe-west2` for the UK).
+3. **Build → Authentication** can be left alone — we don't require sign-in.
+4. Go to **Project settings (cog) → Your apps → Add app → Web app**. Give it a nickname (e.g. "DFSQ Practice Web"). Copy the `firebaseConfig` object that's shown.
+5. In your local project, copy `web/firebase-config.template.js` to `web/firebase-config.js` and paste the values from step 4 into it. The file is gitignored so credentials aren't committed.
+6. Apply the Firestore security rules: in Firebase Console go to **Firestore Database → Rules**, paste the entire contents of `firestore.rules` (in the repo root) over what's there, click **Publish**.
+7. Run `npm run build:web`, commit, push. GitHub Actions deploys the updated site and the upload + teacher dashboard come alive.
+
+### Daily use
+
+**Students:**
+- Open the web app
+- Enter your name and your teacher's class code (e.g. `YR11-DFSQ`)
+- Take a practice test as normal
+- When the results page appears, you'll see a small pill: "✓ Result sent to class YR11-DFSQ"
+
+The class code is remembered between sessions so students only type it once.
+
+**Teachers:**
+- Open **/teacher/** on the same domain (e.g. `https://0mattsmith.github.io/DigitalFSTest/teacher/`)
+- Enter your class code
+- Bookmark the page with the class code in the URL (`?class=YR11-DFSQ` works too) — it'll auto-load next time
+- The leaderboard updates **in real time** as students finish — no refresh needed
+- Click any column header to sort, or **Export CSV** to download for record-keeping
+- The "Class-wide weak topics" panel shows where the whole class is missing marks, so you know what to teach next
+
+### Security model
+
+- The class code acts as a shared secret. Anyone with the code can read or submit to that class. Don't share the code publicly.
+- The Firestore rules prevent anyone from updating or deleting attempts — once submitted, they're permanent.
+- The Firebase Web App config (in `firebase-config.js`) is meant to be public — it's embedded in every Firebase site and is safe to commit. Security comes from the Firestore rules, not by hiding the config.
+- If you want stricter rules (require teacher sign-in to view), uncomment the "stricter variant" section at the bottom of `firestore.rules`.
+
 ## Progressive Web App (PWA)
 
 The web version is a fully-featured PWA. Students can:
