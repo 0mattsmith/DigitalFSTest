@@ -53,7 +53,8 @@ export function showHome(api, state) {
   const classCodeInput = h('input', {
     type: 'text', placeholder: 'Class code (optional)',
     value: getStoredClassCode(),
-    style: { textTransform: 'uppercase', fontFamily: 'Menlo,monospace' },
+    class: 'class-code-input',
+    style: { fontFamily: 'Menlo,monospace' },
     onInput: (e) => {
       const code = (e.target.value || '').toUpperCase();
       setStoredClassCode(code);

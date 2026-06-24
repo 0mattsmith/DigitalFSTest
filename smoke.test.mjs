@@ -173,6 +173,7 @@ const expected = [
   ['src/renderer/screens/work-on.js', /export async function showWorkOn/],
   ['src/renderer/screens/install-prompt.js', /export async function triggerInstall/],
   ['src/renderer/screens/firebase-client.js', /export async function uploadAttempt/],
+  ['src/renderer/screens/milestone-review.js', /export function buildMilestoneSummary/],
 ];
 for (const [rel, re] of expected) {
   const p = path.join(__dirname, rel);
