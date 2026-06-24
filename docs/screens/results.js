@@ -6,6 +6,7 @@
 
 import { h } from './components.js';
 import { uploadAttempt, isConfigured as firebaseConfigured, getStoredClassCode } from './firebase-client.js';
+import { isMilestoneAttempt, buildMilestoneSummary, renderMilestonePanel, startBespokeRevision } from './milestone-review.js';
 
 export async function showResults(api, state) {
   const screen = document.getElementById('screen');
@@ -114,6 +115,24 @@ export async function showResults(api, state) {
       h('button', { class: 'orange-btn', onClick: () => api.go('workOn') }, 'What to work on ▶'),
       h('button', { class: 'btn-mini', onClick: () => api.go('history') }, 'View history'),
       h('button', { class: 'btn-mini', onClick: () => api.bridge.openAttemptFolder(state.attempt.id) }, 'Open saved files')));
+  // Milestone review: every 5th attempt at this level, surface a panel
+  // summarising the last 5 + a button to start a bespoke revision exam
+  // built only from the topics the student is missing marks on.
+  try {
+    const history = await api.bridge.listHistory();
+    if (isMilestoneAttempt(history, state.attempt.level)) {
+      const summary = buildMilestoneSummary(history, state.attempt.level);
+      if (summary) {
+        const wrap = h('div', { class: 'milestone-wrap' });
+        renderMilestonePanel(wrap, summary, () => startBespokeRevision(api, state, summary));
+        // Insert at the top of the results so the student sees it first
+        results.insertBefore(wrap, results.firstChild);
+      }
+    }
+  } catch (err) {
+    console.warn('[milestone] failed:', err);
+  }
+
   screen.appendChild(results);
   api.setFooter('hidden');
 }
