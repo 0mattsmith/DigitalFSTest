@@ -14,7 +14,7 @@
 //   - On activation, old caches are deleted so the user's storage
 //     doesn't grow unbounded.
 
-const CACHE_VERSION = '2026-06-24T09-05-41-758Z';   // replaced by build-web.js
+const CACHE_VERSION = '2026-06-24T09-14-44-776Z';   // replaced by build-web.js
 const CACHE_NAME = 'dfsq-' + CACHE_VERSION;
 
 // Files we want available offline as soon as the SW installs.
