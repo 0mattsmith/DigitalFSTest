@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Background — Pearson navy with a subtle vertical gradient -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a4d80"/>
+      <stop offset="100%" stop-color="#002848"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffa14d"/>
+      <stop offset="100%" stop-color="#e26b00"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="14" stdDeviation="24" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Rounded square card -->
+  <rect x="56" y="56" width="912" height="912" rx="200" ry="200" fill="url(#bg)"/>
+
+  <!-- Subtle inner highlight along the top edge -->
+  <rect x="56" y="56" width="912" height="220" rx="200" ry="200" fill="#ffffff" opacity="0.04"/>
+
+  <!-- Orange circle accent in the top-right corner -->
+  <circle cx="790" cy="244" r="86" fill="url(#orange)" filter="url(#shadow)"/>
+  <!-- Small white tick inside the orange circle -->
+  <path d="M 745 244 L 780 282 L 838 214"
+        stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- DFSQ wordmark centred -->
+  <text x="512" y="610"
+        font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+        font-weight="900"
+        font-size="280"
+        fill="#ffffff"
+        text-anchor="middle"
+        letter-spacing="-6">DFSQ</text>
+
+  <!-- "PRACTICE" subtitle in orange -->
+  <text x="512" y="740"
+        font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+        font-weight="700"
+        font-size="86"
+        fill="#f0801f"
+        text-anchor="middle"
+        letter-spacing="22">PRACTICE</text>
+</svg>

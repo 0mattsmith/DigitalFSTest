@@ -4,7 +4,12 @@ package-lock.json
 
 # Build output
 dist/
-build/
+
+# Don't gitignore build/ — it holds the icon master assets (icon.png,
+# icon-192.png, icon-512.png, icon-maskable-512.png, icon.ico). These
+# need to be committed so the GitHub Actions workflow can copy them
+# into docs/ when it builds the site.
+# build/  ← intentionally NOT ignored
 
 # Per-user data — student attempts and history should never be committed
 user-data/
